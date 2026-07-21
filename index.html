@@ -261,7 +261,7 @@
             border-top: 1px solid #ede7e0;
             display: flex;
             justify-content: center;
-            gap: 20px;
+            gap: 14px;
             flex-wrap: wrap;
         }
 
@@ -279,6 +279,7 @@
             border: 1px solid #d6cbbc;
             transition: 0.2s ease;
             font-family: 'Inter', sans-serif;
+            cursor: pointer;
         }
 
         .connect-link:hover {
@@ -290,6 +291,29 @@
 
         .connect-link .emoji {
             font-size: 20px;
+        }
+
+        /* notification de copie */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2c241e;
+            color: #fcf8f3;
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 16px;
+            font-family: 'Inter', sans-serif;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 999;
+        }
+
+        .toast.show {
+            opacity: 1;
         }
 
         .footer {
@@ -433,11 +457,11 @@
                 font-size: 17px;
             }
             .connect-section {
-                gap: 12px;
+                gap: 10px;
             }
             .connect-link {
                 font-size: 14px;
-                padding: 6px 14px;
+                padding: 6px 12px;
             }
             .start-btn {
                 padding: 16px 36px;
@@ -506,15 +530,17 @@
             <span class="icon-arrow">→</span>
         </a>
 
-        <!-- SECTION "RESTONS CONNECTÉS" - avec liens robustes -->
+        <!-- SECTION "RESTONS CONNECTÉS" avec le bouton Partager -->
         <div class="connect-section">
-            <!-- Lien Facebook : on force l'ouverture dans le navigateur avec target et rel -->
             <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link">
                 <span class="emoji">👍</span> Nous suivre
             </a>
-            <!-- Lien mailto : on utilise un onclick pour éviter les erreurs de schéma dans certains WebViews -->
             <a href="#" onclick="ouvrirMail(); return false;" class="connect-link">
                 <span class="emoji">✉️</span> Nous écrire
+            </a>
+            <!-- NOUVEAU BOUTON PARTAGER -->
+            <a href="#" onclick="partagerCarte(); return false;" class="connect-link">
+                <span class="emoji">📤</span> Partager
             </a>
         </div>
 
@@ -523,6 +549,9 @@
             <span style="font-size:12px; color:#c4b3a2;">été 2026 · sans distraction</span>
         </div>
     </div>
+
+    <!-- TOAST pour notification de copie -->
+    <div id="toast" class="toast">Lien copié dans le presse-papiers !</div>
 
     <script>
         // Gestion de la musique
@@ -570,21 +599,78 @@
             audio.pause();
         });
 
-        // --- Fonction pour ouvrir le mailto de manière robuste ---
+        // --- Fonction mailto robuste ---
         function ouvrirMail() {
             var mail = 'boutiquestyleshopp@gmail.com';
             var subject = 'Demande d\'information';
             var body = 'Bonjour, je vous contacte depuis la carte Mardi été...';
             var url = 'mailto:' + mail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-            // Tentative avec window.location
             window.location.href = url;
-            // Fallback : si après 500ms le mailto n'a pas ouvert (car bloqué), on affiche un message
-            // (cela arrive dans certains WebViews)
-            setTimeout(function() {
-                // On ne peut pas détecter facilement si le mailto a fonctionné,
-                // donc on propose une alternative : copier l'email dans le presse-papiers ?
-                // Mais pour rester simple, on laisse le mailto faire son travail.
-            }, 500);
+        }
+
+        // --- Fonction de partage ---
+        function partagerCarte() {
+            var url = window.location.href;
+            var titre = 'Bon mardi productif · été 2026';
+            var texte = 'Découvre cette carte pleine d’énergie et de bonnes vibes !';
+
+            if (navigator.share) {
+                // API Web Share (mobile / navigateurs compatibles)
+                navigator.share({
+                    title: titre,
+                    text: texte,
+                    url: url
+                }).catch(function(err) {
+                    // Si l'utilisateur annule, on ne fait rien
+                    if (err.name !== 'AbortError') {
+                        console.warn('Erreur de partage :', err);
+                        copierLien(url);
+                    }
+                });
+            } else {
+                // Fallback : copier le lien
+                copierLien(url);
+            }
+        }
+
+        // --- Copier le lien dans le presse-papiers ---
+        function copierLien(url) {
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(function() {
+                    afficherToast('Lien copié ! Partagez-le autour de vous ✨');
+                }).catch(function() {
+                    // Fallback si clipboard échoue
+                    fallbackCopier(url);
+                });
+            } else {
+                fallbackCopier(url);
+            }
+        }
+
+        // Fallback pour copier le texte (ancienne méthode)
+        function fallbackCopier(texte) {
+            var textarea = document.createElement('textarea');
+            textarea.value = texte;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                afficherToast('Lien copié ! Partagez-le autour de vous ✨');
+            } catch (err) {
+                afficherToast('Copie manuelle : ' + texte);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // Afficher une notification temporaire
+        function afficherToast(message) {
+            var toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.classList.add('show');
+            clearTimeout(toast._timer);
+            toast._timer = setTimeout(function() {
+                toast.classList.remove('show');
+            }, 4000);
         }
     </script>
 
