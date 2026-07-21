@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mardi · été · productif</title>
+    <title id="pageTitle">saison · ambiance</title>
+    <!-- Font Awesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
         /* ----- RESET & BASE ----- */
         * {
@@ -53,7 +55,7 @@
             border: 1px solid #d6cbbc;
         }
 
-        .icon-soleil {
+        .icon-saison {
             font-size: 52px;
             display: block;
             margin-bottom: 2px;
@@ -88,6 +90,154 @@
             padding: 12px 16px;
             display: inline-block;
             backdrop-filter: blur(4px);
+        }
+
+        /* --- BLOC DATE / HEURE / MÉTÉO (version animée) --- */
+        .datetime-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 6px;
+            background: #faf7f3;
+            border-radius: 32px;
+            padding: 16px 22px;
+            margin: 8px 0 18px;
+            border: 1px solid #e7dfd6;
+            backdrop-filter: blur(4px);
+            font-size: 15px;
+            font-weight: 450;
+            color: #2c241e;
+        }
+
+        .datetime-block .row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 8px 20px;
+            width: 100%;
+        }
+
+        .datetime-block .row-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: apparition 0.8s ease;
+        }
+
+        .datetime-block .week-number {
+            background: #eae3da;
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #4d3e32;
+            border: 1px solid #d6cbbc;
+        }
+
+        .datetime-block .date-part {
+            font-weight: 500;
+        }
+
+        .datetime-block .time-part {
+            font-variant-numeric: tabular-nums;
+            font-weight: 500;
+        }
+
+        .datetime-block .time-part .seconds {
+            opacity: 0.6;
+            font-weight: 350;
+        }
+
+        .datetime-block .weather-part {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(235, 225, 215, 0.4);
+            padding: 4px 18px 4px 14px;
+            border-radius: 40px;
+            border: 1px solid #ddd2c6;
+            animation: pulseMeteo 3s ease-in-out infinite;
+            cursor: default;
+        }
+
+        .datetime-block .weather-part .weather-emoji {
+            font-size: 22px;
+        }
+
+        .datetime-block .weather-part .weather-temp {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .datetime-block .weather-part .weather-city {
+            color: #7a685a;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        .datetime-block .emoji-icon {
+            font-size: 18px;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes apparition {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseMeteo {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.03);
+            }
+        }
+
+        @keyframes doux-levier {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(4deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* --- BOUTON POSITION --- */
+        .btn-position {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: transparent;
+            border: 1.5px solid #d6cbbc;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-size: 13px;
+            font-weight: 500;
+            color: #4d3e32;
+            cursor: pointer;
+            transition: 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .btn-position:hover {
+            background: #eae3da;
+            border-color: #b09b8a;
+            transform: translateY(-2px);
+        }
+
+        .btn-position:active {
+            transform: scale(0.95);
+        }
+
+        .btn-position i {
+            font-size: 14px;
         }
 
         .message {
@@ -289,8 +439,26 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
+        .connect-link i {
+            font-size: 18px;
+            width: 20px;
+            text-align: center;
+        }
+
         .connect-link .emoji {
             font-size: 20px;
+        }
+
+        .connect-link.linkedin-btn i {
+            color: #0a66c2;
+        }
+
+        .connect-link.facebook-btn i {
+            color: #1877f2;
+        }
+
+        .connect-link.gmail-btn i {
+            color: #ea4335;
         }
 
         /* notification de copie */
@@ -338,12 +506,6 @@
         .footer a:hover {
             border-bottom-color: #7a685a;
             color: #2c241e;
-        }
-
-        @keyframes doux-levier {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(4deg); }
-            100% { transform: translateY(0) rotate(0deg); }
         }
 
         /* ===== ÉCRAN DE DÉMARRAGE ===== */
@@ -470,6 +632,29 @@
             #startScreen h2 {
                 font-size: 30px;
             }
+            .datetime-block {
+                padding: 14px 16px;
+                gap: 4px;
+            }
+            .datetime-block .row {
+                gap: 4px 12px;
+            }
+            .datetime-block .row-item {
+                font-size: 13px;
+            }
+            .datetime-block .weather-part {
+                padding: 3px 14px 3px 10px;
+            }
+            .datetime-block .weather-part .weather-emoji {
+                font-size: 18px;
+            }
+            .datetime-block .weather-part .weather-temp {
+                font-size: 14px;
+            }
+            .datetime-block .week-number {
+                font-size: 12px;
+                padding: 3px 12px;
+            }
         }
 
         @media (max-width: 400px) {
@@ -483,21 +668,48 @@
 
     <!-- ÉCRAN DE DÉMARRAGE -->
     <div id="startScreen">
-        <span class="start-icon">☀️</span>
-        <h2>Mardi · été</h2>
-        <div class="sous-start">productivité · lumière · action</div>
+        <span class="start-icon" id="startIcon">☀️</span>
+        <h2 id="splashTitle">saison · ambiance</h2>
+        <div class="sous-start" id="splashSub">bienvenue · saison · présent</div>
         <button class="start-btn" id="startBtn">▶ Démarrer</button>
     </div>
 
     <!-- CARTE -->
     <div class="card">
-        <span class="badge-saison">☀️ été · mardi</span>
-        <span class="icon-soleil">🌻</span>
-        <h1>Bon mardi <span>productif</span></h1>
-        <div class="sous-titre">✧ énergie & clarté ✧</div>
+        <span class="badge-saison" id="badgeSaison">☀️ saison</span>
+        <span class="icon-saison" id="iconSaison">🌻</span>
+        <h1 id="mainTitle">Bonjour <span>jour</span></h1>
+        <div class="sous-titre" id="dailySubtitle">✧ douceur & légèreté ✧</div>
 
+        <!-- BLOC DATE / HEURE / MÉTÉO (version animée) -->
+        <div class="datetime-block">
+            <div class="row">
+                <span class="row-item week-number">
+                    ✨ Semaine <span id="weekDisplay">--</span>
+                </span>
+                <span class="row-item date-part">
+                    📅 <span id="dateDisplay">--</span>
+                </span>
+                <span class="row-item time-part">
+                    🕒 <span id="timeDisplay">--:--</span>
+                    <span class="seconds" id="secondsDisplay">:--</span>
+                </span>
+            </div>
+            <div class="row">
+                <span class="row-item weather-part" id="weatherDisplay">
+                    <span class="weather-emoji" id="weatherEmoji">☀️</span>
+                    <span class="weather-temp" id="weatherTemp">--°C</span>
+                    <span class="weather-city" id="weatherCity">📍 --</span>
+                </span>
+                <button class="btn-position" id="btnPosition" title="Utiliser ma position précise">
+                    <i class="fas fa-location-dot"></i> Ma position
+                </button>
+            </div>
+        </div>
+
+        <!-- MESSAGE DYNAMIQUE -->
         <div class="message">
-            <strong>“</strong> Chaque action compte,<br /> chaque instant est une chance d’avancer. <strong>”</strong>
+            <strong>“</strong> <span id="dailyMessage">--</span> <strong>”</strong>
         </div>
 
         <button class="music-btn" id="playMusicBtn">
@@ -530,116 +742,508 @@
             <span class="icon-arrow">→</span>
         </a>
 
-        <!-- SECTION "RESTONS CONNECTÉS" avec le bouton Partager -->
+        <!-- SECTION "RESTONS CONNECTÉS" -->
         <div class="connect-section">
-            <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link">
-                <span class="emoji">👍</span> Nous suivre
+            <a href="https://www.linkedin.com/in/aymane-abidine/" target="_blank" rel="noopener noreferrer" class="connect-link linkedin-btn">
+                <i class="fa-brands fa-linkedin"></i> LinkedIn
             </a>
-            <a href="#" onclick="ouvrirMail(); return false;" class="connect-link">
-                <span class="emoji">✉️</span> Nous écrire
+            <a href="https://cv-aymane-abidine.vercel.app/" target="_blank" rel="noopener noreferrer" class="connect-link">
+                <span class="emoji">📄</span> CV
             </a>
-            <!-- NOUVEAU BOUTON PARTAGER -->
-            <a href="#" onclick="partagerCarte(); return false;" class="connect-link">
-                <span class="emoji">📤</span> Partager
+            <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link facebook-btn">
+                <i class="fa-brands fa-facebook"></i> Nous suivre
             </a>
+            <!-- BOUTON GMAIL AVEC ICÔNE ET EMAIL -->
+            <a href="#" onclick="ouvrirMail(); return false;" class="connect-link gmail-btn">
+                <i class="fa-brands fa-google"></i> Gmail
+            </a>
+            <!-- BOUTON PARTAGER AVEC ICÔNE FONT AWESOME -->
+            <button class="connect-link" onclick="partagerCarte(); return false;" style="background:#faf7f3;border:1px solid #d6cbbc;font-family:inherit;cursor:pointer;">
+                <i class="fa-solid fa-share-nodes"></i> Partager
+            </button>
         </div>
 
         <div class="footer">
             ★ <a href="#">Recevoir la lettre</a> — offerte<br />
-            <span style="font-size:12px; color:#c4b3a2;">été 2026 · sans distraction</span>
+            <span style="font-size:12px; color:#c4b3a2;" id="footerYear">saison · sans distraction</span>
         </div>
     </div>
 
-    <!-- TOAST pour notification de copie -->
+    <!-- TOAST -->
     <div id="toast" class="toast">Lien copié dans le presse-papiers !</div>
 
     <script>
-        // Gestion de la musique
-        const startScreen = document.getElementById('startScreen');
-        const startBtn = document.getElementById('startBtn');
-        const btn = document.getElementById('playMusicBtn');
-        const status = document.getElementById('musicStatus');
-        const audio = new Audio('https://files.catbox.moe/krktrv.mp3');
-        audio.loop = true;
+        // ============================================================
+        // 1. GESTION DYNAMIQUE : DATE / HEURE / SAISON / JOUR
+        // ============================================================
+        (function initDynamicContent() {
+            // Éléments DOM
+            const dateDisplay = document.getElementById('dateDisplay');
+            const timeDisplay = document.getElementById('timeDisplay');
+            const secondsDisplay = document.getElementById('secondsDisplay');
+            const badgeSaison = document.getElementById('badgeSaison');
+            const splashTitle = document.getElementById('splashTitle');
+            const splashSub = document.getElementById('splashSub');
+            const footerYear = document.getElementById('footerYear');
+            const weekDisplay = document.getElementById('weekDisplay');
+            const pageTitle = document.getElementById('pageTitle');
+            const dailyMessage = document.getElementById('dailyMessage');
+            const dailySubtitle = document.getElementById('dailySubtitle');
+            const iconSaison = document.getElementById('iconSaison');
+            const startIcon = document.getElementById('startIcon');
+            const mainTitle = document.getElementById('mainTitle');
 
-        function demarrerMusique() {
-            audio.play()
-                .then(() => {
-                    status.textContent = '🎵 en cours · focus';
-                    btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
-                })
-                .catch((err) => {
-                    status.textContent = '⚠️ erreur de lecture';
-                    console.warn(err);
-                });
-            startScreen.classList.add('hidden');
-        }
+            // Constantes
+            const jours = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+            const mois = ['janvier', 'février', 'mars', 'avril', 'mai', 'juin', 'juillet', 'août', 'septembre', 'octobre', 'novembre', 'décembre'];
 
-        startBtn.addEventListener('click', demarrerMusique);
+            // Messages personnalisés pour chaque jour
+            const messagesJour = {
+                Dimanche: "🌿 Profitez de ce dimanche pour ralentir et vous ressourcer.",
+                Lundi: "🚀 Nouveau départ, nouvelle semaine, nouveaux objectifs.",
+                Mardi: "☀️ Continuez vos efforts, chaque action vous rapproche de vos objectifs.",
+                Mercredi: "✨ Le milieu de semaine est le moment parfait pour avancer.",
+                Jeudi: "🔥 Gardez le rythme, vos projets prennent forme.",
+                Vendredi: "🎯 Terminez la semaine avec énergie et satisfaction.",
+                Samedi: "🌻 Profitez de cette journée pour créer et vous détendre."
+            };
 
-        btn.addEventListener('click', function() {
-            if (audio.paused) {
+            // Sous-titres personnalisés pour chaque jour
+            const sousTitresJour = {
+                Dimanche: "✧ repos & sérénité ✧",
+                Lundi: "✧ énergie & nouveau départ ✧",
+                Mardi: "✧ douceur & progression ✧",
+                Mercredi: "✧ équilibre & créativité ✧",
+                Jeudi: "✧ concentration & avancée ✧",
+                Vendredi: "✧ accomplissement & satisfaction ✧",
+                Samedi: "✧ liberté & inspiration ✧"
+            };
+
+            /**
+             * Détermine la saison en fonction de la date
+             */
+            function getSaison(date) {
+                const m = date.getMonth() + 1;
+                const j = date.getDate();
+
+                if ((m === 3 && j >= 20) || m === 4 || m === 5 || (m === 6 && j < 21)) {
+                    return { nom: "printemps", emoji: "🌸", ambiance: "renouveau", icone: "🌱" };
+                }
+                if ((m === 6 && j >= 21) || m === 7 || m === 8 || (m === 9 && j < 23)) {
+                    return { nom: "été", emoji: "☀️", ambiance: "productif", icone: "🌻" };
+                }
+                if ((m === 9 && j >= 23) || m === 10 || m === 11 || (m === 12 && j < 21)) {
+                    return { nom: "automne", emoji: "🍂", ambiance: "créatif", icone: "🍁" };
+                }
+                return { nom: "hiver", emoji: "❄️", ambiance: "paisible", icone: "❄️" };
+            }
+
+            /**
+             * Numéro de semaine ISO
+             */
+            function getWeekNumber(date) {
+                const d = new Date(date);
+                d.setHours(0, 0, 0, 0);
+                const jeudi = new Date(d);
+                jeudi.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
+                const debutAnnee = new Date(jeudi.getFullYear(), 0, 1);
+                return Math.floor((jeudi - debutAnnee) / 86400000 / 7) + 1;
+            }
+
+            /**
+             * Retourne la salutation appropriée selon l'heure
+             */
+            function getSalutation(heure) {
+                if (heure >= 5 && heure < 12) {
+                    return 'Bonjour';
+                } else if (heure >= 12 && heure < 18) {
+                    return 'Bon après-midi';
+                } else if (heure >= 18 && heure < 22) {
+                    return 'Bonsoir';
+                } else {
+                    return 'Bonne nuit';
+                }
+            }
+
+            function mettreAJour() {
+                const now = new Date();
+                const saison = getSaison(now);
+                const jour = now.getDay();
+                const jourNom = jours[jour];
+                const heure = now.getHours();
+
+                // ---- Date ----
+                const dateStr = jourNom + ' ' + now.getDate() + ' ' + mois[now.getMonth()] + ' ' + now.getFullYear();
+                dateDisplay.textContent = dateStr;
+
+                // ---- Heure ----
+                const h = String(now.getHours()).padStart(2, '0');
+                const min = String(now.getMinutes()).padStart(2, '0');
+                const sec = String(now.getSeconds()).padStart(2, '0');
+                timeDisplay.textContent = h + ':' + min;
+                secondsDisplay.textContent = ':' + sec;
+
+                // ---- Semaine ----
+                weekDisplay.textContent = getWeekNumber(now);
+
+                // ---- Icônes ----
+                iconSaison.textContent = saison.icone;
+                startIcon.textContent = saison.emoji;
+
+                // ---- BADGE DYNAMIQUE : UNIQUEMENT "emoji saison" ----
+                badgeSaison.textContent = saison.emoji + ' ' + saison.nom;
+
+                // ---- TITRE PAGE DYNAMIQUE : JOUR + SAISON + AMBIANCE ----
+                let titreComplet = jourNom + ' · ' + saison.nom + ' · ' + saison.ambiance;
+                splashTitle.textContent = titreComplet;
+                pageTitle.textContent = titreComplet;
+                document.title = titreComplet;
+
+                // ---- TITRE PRINCIPAL : Salutation adaptée à l'heure ----
+                const salutation = getSalutation(heure);
+                const emojiSalutation = heure >= 5 && heure < 12 ? '☀️' :
+                                       heure >= 12 && heure < 18 ? '🌤️' :
+                                       heure >= 18 && heure < 22 ? '🌅' : '🌙';
+                mainTitle.innerHTML = salutation + ' <span>' + emojiSalutation + '</span>';
+
+                // ---- SOUS-TITRES ----
+                splashSub.textContent = 'bienvenue · ' + saison.ambiance + ' · présent';
+                footerYear.textContent = saison.nom + ' ' + now.getFullYear() + ' · sans distraction';
+
+                // ---- MESSAGE DU JOUR ----
+                dailyMessage.textContent = messagesJour[jourNom] || 'Chaque jour est une nouvelle page, chaque instant une opportunité.';
+
+                // ---- SOUS-TITRE DU JOUR ----
+                dailySubtitle.textContent = sousTitresJour[jourNom] || '✧ douceur & légèreté ✧';
+            }
+
+            // Exécution immédiate + intervalle
+            mettreAJour();
+            setInterval(mettreAJour, 1000);
+        })();
+
+        // ============================================================
+        // 2. MÉTÉO AMÉLIORÉE : GPS PRIORITAIRE + IP FALLBACK
+        //    EMOJI INTELLIGENT SELON L'HEURE
+        //    LOGS DÉTAILLÉS DANS LA CONSOLE
+        // ============================================================
+        (function initWeather() {
+            const weatherEmoji = document.getElementById('weatherEmoji');
+            const weatherTemp = document.getElementById('weatherTemp');
+            const weatherCity = document.getElementById('weatherCity');
+
+            let villeParDefaut = 'Lyon';
+            let currentLat = null;
+            let currentLon = null;
+            let sourceActuelle = 'Inconnue';
+
+            /**
+             * Fonction principale : détermine l'emoji météo selon le code WMO et l'heure             */
+            function getWeatherEmoji(code) {
+                const now = new Date();
+                const heure = now.getHours();
+                const estNuit = (heure >= 18 || heure < 6);
+
+                // Mapping des codes WMO vers des catégories
+                const categories = {
+                    clear: [0],
+                    mostlyClear: [1],
+                    partlyCloudy: [2],
+                    overcast: [3],
+                    fog: [45, 48],
+                    drizzle: [51, 53, 55, 56, 57],
+                    rain: [61, 63, 65, 66, 67],
+                    snow: [71, 73, 75, 77],
+                    showers: [80, 81, 82],
+                    snowShowers: [85, 86],
+                    thunderstorm: [95, 96, 99]
+                };
+
+                let category = 'unknown';
+                for (const [cat, codes] of Object.entries(categories)) {
+                    if (codes.includes(code)) {
+                        category = cat;
+                        break;
+                    }
+                }
+
+                // Emojis de jour
+                const emojisJour = {
+                    clear: '☀️',
+                    mostlyClear: '🌤️',
+                    partlyCloudy: '⛅',
+                    overcast: '☁️',
+                    fog: '🌫️',
+                    drizzle: '🌦️',
+                    rain: '🌧️',
+                    snow: '❄️',
+                    showers: '🌧️',
+                    snowShowers: '❄️',
+                    thunderstorm: '⛈️',
+                    unknown: '🌍'
+                };
+
+                // Emojis de nuit
+                const emojisNuit = {
+                    clear: '🌙',
+                    mostlyClear: '🌙',
+                    partlyCloudy: '🌙☁️',
+                    overcast: '☁️',
+                    fog: '🌫️',
+                    drizzle: '🌧️',
+                    rain: '🌧️',
+                    snow: '❄️',
+                    showers: '🌧️',
+                    snowShowers: '❄️',
+                    thunderstorm: '⛈️',
+                    unknown: '🌍'
+                };
+
+                // Choisir l'emoji selon le jour ou la nuit
+                const emoji = estNuit ? emojisNuit[category] || emojisNuit.unknown : emojisJour[category] || emojisJour.unknown;
+
+                // Log pour le débogage
+                console.log(`🕐 ${estNuit ? '🌙 Nuit' : '☀️ Jour'} - Code ${code} → ${emoji}`);
+
+                return emoji;
+            }
+
+            /**
+             * Récupère le nom de la ville via l'API de géocodage
+             */
+            async function getCityName(lat, lon) {
+                try {
+                    const url = `https://geocoding-api.open-meteo.com/v1/search?latitude=${lat}&longitude=${lon}&count=1&language=fr`;
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error('Geocoding API error');
+                    const data = await response.json();
+                    if (data.results && data.results.length > 0) {
+                        return data.results[0].name;
+                    }
+                    return null;
+                } catch (error) {
+                    console.log('⚠️ Erreur géocodage :', error);
+                    return null;
+                }
+            }
+
+            /**
+             * Charge la météo à partir de coordonnées précises
+             */
+            async function chargerMeteoAvecCoords(lat, lon, villeSuggestion, source) {
+                try {
+                    if (!lat || !lon) throw new Error('Coordonnées manquantes');
+
+                    // Récupérer le nom de la ville
+                    let ville = await getCityName(lat, lon);
+                    if (!ville) ville = villeSuggestion || villeParDefaut;
+
+                    // Appel à l'API Open-Meteo
+                    const meteoResponse = await fetch(
+                        `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`
+                    );
+                    if (!meteoResponse.ok) throw new Error('Meteo API error');
+                    const meteo = await meteoResponse.json();
+
+                    const temperature = Math.round(meteo.current.temperature_2m);
+                    const code = meteo.current.weather_code;
+
+                    // Mise à jour de l'affichage
+                    weatherEmoji.textContent = getWeatherEmoji(code);
+                    weatherTemp.textContent = temperature + '°C';
+                    weatherCity.textContent = '📍 ' + ville;
+
+                    // Sauvegarde des coordonnées et de la source
+                    currentLat = lat;
+                    currentLon = lon;
+                    sourceActuelle = source;
+
+                    // Logs détaillés dans la console
+                    console.log('========================================');
+                    console.log('🌤️ MÉTÉO MISE À JOUR');
+                    console.log(`📍 Source : ${source}`);
+                    console.log(`📌 Coordonnées : ${lat.toFixed(4)}, ${lon.toFixed(4)}`);
+                    console.log(`🏙️ Ville : ${ville}`);
+                    console.log(`🌡️ Température : ${temperature}°C`);
+                    console.log(`🔢 Code météo : ${code}`);
+                    console.log(`🎨 Emoji : ${weatherEmoji.textContent}`);
+                    console.log('========================================');
+
+                } catch (error) {
+                    console.log('❌ Erreur météo :', error);
+                    weatherEmoji.textContent = '🌍';
+                    weatherTemp.textContent = '--°C';
+                    weatherCity.textContent = '📍 ' + (villeSuggestion || villeParDefaut);
+                }
+            }
+
+            /**
+             * Charge la météo via l'IP (fallback)
+             */
+            async function chargerMeteoParIP() {
+                try {
+                    console.log('📡 Tentative de localisation par IP...');
+                    const ipResponse = await fetch('https://ipapi.co/json/');
+                    if (!ipResponse.ok) throw new Error('IP API error');
+                    const location = await ipResponse.json();
+                    const lat = location.latitude;
+                    const lon = location.longitude;
+                    const ville = location.city || villeParDefaut;
+
+                    if (lat && lon) {
+                        await chargerMeteoAvecCoords(lat, lon, ville, 'IP (ipapi.co)');
+                    } else {
+                        throw new Error('Coordonnées IP manquantes');
+                    }
+                } catch (error) {
+                    console.log('❌ Météo IP indisponible :', error);
+                    weatherEmoji.textContent = '🌍';
+                    weatherTemp.textContent = '--°C';
+                    weatherCity.textContent = '📍 ' + villeParDefaut;
+                }
+            }
+
+            /**
+             * Charge la météo via GPS (prioritaire)
+             */
+            function chargerMeteoParGPS() {
+                if (!navigator.geolocation) {
+                    console.log('⚠️ Géolocalisation non supportée, fallback IP');
+                    chargerMeteoParIP();
+                    return;
+                }
+
+                console.log('📡 Tentative de localisation GPS...');
+                afficherToast('📍 Recherche de votre position...');
+
+                navigator.geolocation.getCurrentPosition(
+                    async function(position) {
+                        const lat = position.coords.latitude;
+                        const lon = position.coords.longitude;
+                        console.log(`✅ GPS réussi : ${lat.toFixed(4)}, ${lon.toFixed(4)}`);
+                        await chargerMeteoAvecCoords(lat, lon, null, 'GPS (navigator.geolocation)');
+                        afficherToast('📍 Position GPS mise à jour');
+                    },
+                    function(error) {
+                        let msg = '📍 Position non disponible';
+                        if (error.code === 1) {
+                            msg = '📍 Autorisation refusée';
+                            console.log('⚠️ Utilisateur a refusé la géolocalisation');
+                        } else if (error.code === 2) {
+                            msg = '📍 Signal GPS indisponible';
+                            console.log('⚠️ Signal GPS indisponible');
+                        } else if (error.code === 3) {
+                            msg = '📍 Délai d\'attente dépassé';
+                            console.log('⚠️ Délai d\'attente GPS dépassé');
+                        }
+                        afficherToast(msg);
+                        console.log(`📡 Fallback vers la localisation IP...`);
+                        chargerMeteoParIP();
+                    },
+                    {
+                        enableHighAccuracy: true,
+                        timeout: 10000,
+                        maximumAge: 60000
+                    }
+                );
+            }
+
+            // ---- LANCEMENT : GPS prioritaire, puis fallback IP, actualisation toutes les 15 min ----
+            chargerMeteoParGPS();
+            setInterval(chargerMeteoParGPS, 900000); // 15 minutes
+
+            // ---- Événement du bouton "Ma position" ----
+            document.getElementById('btnPosition').addEventListener('click', chargerMeteoParGPS);
+
+        })();
+
+        // ============================================================
+        // 3. MUSIQUE
+        // ============================================================
+        (function initMusic() {
+            const startScreen = document.getElementById('startScreen');
+            const startBtn = document.getElementById('startBtn');
+            const btn = document.getElementById('playMusicBtn');
+            const status = document.getElementById('musicStatus');
+            const audio = new Audio('https://files.catbox.moe/krktrv.mp3');
+            audio.loop = true;
+
+            function demarrerMusique() {
                 audio.play()
                     .then(() => {
-                        status.textContent = '🎵 en cours · focus';
+                        status.textContent = '🎵 lecture en cours';
                         btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
                     })
                     .catch((err) => {
-                        status.textContent = '⚠️ erreur';
+                        status.textContent = '⚠️ erreur de lecture';
                         console.warn(err);
                     });
-            } else {
-                audio.pause();
-                status.textContent = '🔇 arrêté';
-                btn.innerHTML = '<span class="icon">🎧</span> Lancer l’ambiance';
+                startScreen.classList.add('hidden');
             }
-        });
 
-        window.addEventListener('beforeunload', function() {
-            audio.pause();
-        });
+            startBtn.addEventListener('click', demarrerMusique);
 
-        // --- Fonction mailto robuste ---
+            btn.addEventListener('click', function() {
+                if (audio.paused) {
+                    audio.play()
+                        .then(() => {
+                            status.textContent = '🎵 lecture en cours';
+                            btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
+                        })
+                        .catch((err) => {
+                            status.textContent = '⚠️ erreur';
+                            console.warn(err);
+                        });
+                } else {
+                    audio.pause();
+                    status.textContent = '🔇 arrêté';
+                    btn.innerHTML = '<span class="icon">🎧</span> Lancer l’ambiance';
+                }
+            });
+
+            window.addEventListener('beforeunload', function() {
+                audio.pause();
+            });
+        })();
+
+        // ============================================================
+        // 4. UTILITAIRES (mail, partage, toast)
+        // ============================================================
         function ouvrirMail() {
             var mail = 'boutiquestyleshopp@gmail.com';
             var subject = 'Demande d\'information';
-            var body = 'Bonjour, je vous contacte depuis la carte Mardi été...';
+            var body = 'Bonjour, je vous contacte depuis la carte ' + document.title + '...';
             var url = 'mailto:' + mail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
             window.location.href = url;
         }
 
-        // --- Fonction de partage ---
         function partagerCarte() {
             var url = window.location.href;
-            var titre = 'Bon mardi productif · été 2026';
-            var texte = 'Découvre cette carte pleine d’énergie et de bonnes vibes !';
+            var titre = document.title;
+            var jourNom = new Date().toLocaleDateString('fr-FR', { weekday: 'long' });
+            var texte = 'Découvre cette carte ' + jourNom + ' pleine d\'énergie et de bonnes vibes !';
 
             if (navigator.share) {
-                // API Web Share (mobile / navigateurs compatibles)
                 navigator.share({
                     title: titre,
                     text: texte,
                     url: url
                 }).catch(function(err) {
-                    // Si l'utilisateur annule, on ne fait rien
                     if (err.name !== 'AbortError') {
                         console.warn('Erreur de partage :', err);
                         copierLien(url);
                     }
                 });
             } else {
-                // Fallback : copier le lien
                 copierLien(url);
             }
         }
 
-        // --- Copier le lien dans le presse-papiers ---
         function copierLien(url) {
             if (navigator.clipboard && navigator.clipboard.writeText) {
                 navigator.clipboard.writeText(url).then(function() {
                     afficherToast('Lien copié ! Partagez-le autour de vous ✨');
                 }).catch(function() {
-                    // Fallback si clipboard échoue
                     fallbackCopier(url);
                 });
             } else {
@@ -647,7 +1251,6 @@
             }
         }
 
-        // Fallback pour copier le texte (ancienne méthode)
         function fallbackCopier(texte) {
             var textarea = document.createElement('textarea');
             textarea.value = texte;
@@ -662,7 +1265,6 @@
             document.body.removeChild(textarea);
         }
 
-        // Afficher une notification temporaire
         function afficherToast(message) {
             var toast = document.getElementById('toast');
             toast.textContent = message;
