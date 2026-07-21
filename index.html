@@ -17,14 +17,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background: #f7f3ed;  /* fond clair et chaleureux */
+            background: #f7f3ed;
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             padding: 20px;
         }
 
         /* ----- CARTE PRINCIPALE ----- */
         .card {
-            max-width: 480px;
+            max-width: 520px;
             width: 100%;
             background: #ffffff;
             border-radius: 40px 40px 32px 32px;
@@ -33,14 +33,12 @@
             text-align: center;
             border: 1px solid rgba(200, 185, 170, 0.25);
             transition: 0.25s ease;
-            position: relative;
         }
 
         .card:hover {
             box-shadow: 0 20px 56px rgba(0, 0, 0, 0.08);
         }
 
-        /* EN-TÊTE : été & productivité */
         .badge-saison {
             display: inline-block;
             background: #eae3da;
@@ -52,7 +50,6 @@
             padding: 6px 22px;
             border-radius: 60px;
             margin-bottom: 12px;
-            font-family: 'Inter', sans-serif;
             border: 1px solid #d6cbbc;
         }
 
@@ -69,7 +66,6 @@
             font-weight: 600;
             color: #2c241e;
             letter-spacing: -0.5px;
-            font-family: 'Inter', sans-serif;
             margin-top: -4px;
         }
 
@@ -105,7 +101,6 @@
             font-weight: 400;
             border: 1px solid #e7dfd6;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
-            font-family: 'Inter', sans-serif;
         }
 
         .message strong {
@@ -160,10 +155,63 @@
             padding: 5px 28px;
             border-radius: 60px;
             border: 1px solid #e0d5ca;
-            font-family: 'Inter', sans-serif;
         }
 
-        /* --- NOUVEAU BOUTON NORD.EXX --- */
+        /* --- BOUTONS THÉMATIQUES --- */
+        .themes-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #2c241e;
+            margin: 24px 0 16px;
+            letter-spacing: 0.5px;
+            border-top: 1px solid #ede7e0;
+            padding-top: 24px;
+        }
+
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .btn-theme {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #faf7f3;
+            border: 1.5px solid #d6cbbc;
+            padding: 12px 8px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #2c241e;
+            text-decoration: none;
+            transition: 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 0 #ddd2c6;
+        }
+
+        .btn-theme:hover {
+            transform: translateY(-2px);
+            background: #ffffff;
+            border-color: #b09b8a;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .btn-theme:active {
+            transform: translateY(2px);
+            box-shadow: none;
+        }
+
+        .btn-theme .emoji {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        /* Bouton Nordexx */
         .btn-nordexx {
             display: inline-flex;
             align-items: center;
@@ -178,12 +226,12 @@
             color: #2c241e;
             cursor: pointer;
             transition: 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
             text-decoration: none;
             margin-top: 12px;
             width: 100%;
             max-width: 280px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
         }
 
         .btn-nordexx:hover {
@@ -206,13 +254,50 @@
             transform: translateX(4px);
         }
 
+        /* --- SECTION "RESTONS CONNECTÉS" --- */
+        .connect-section {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid #ede7e0;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .connect-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #2c241e;
+            text-decoration: none;
+            padding: 8px 16px;
+            border-radius: 40px;
+            background: #faf7f3;
+            border: 1px solid #d6cbbc;
+            transition: 0.2s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .connect-link:hover {
+            background: #ffffff;
+            border-color: #b09b8a;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        }
+
+        .connect-link .emoji {
+            font-size: 20px;
+        }
+
         .footer {
-            margin-top: 30px;
+            margin-top: 28px;
             font-size: 14px;
             color: #b09b8a;
             border-top: 1px solid #e9e0d7;
-            padding-top: 22px;
-            font-family: 'Inter', sans-serif;
+            padding-top: 20px;
             font-weight: 400;
             letter-spacing: 0.2px;
         }
@@ -231,7 +316,6 @@
             color: #2c241e;
         }
 
-        /* animation légère */
         @keyframes doux-levier {
             0% { transform: translateY(0) rotate(0deg); }
             50% { transform: translateY(-6px) rotate(4deg); }
@@ -267,7 +351,6 @@
             font-size: 38px;
             font-weight: 600;
             color: #2c241e;
-            font-family: 'Inter', sans-serif;
             letter-spacing: -1px;
             margin-bottom: 4px;
         }
@@ -282,7 +365,6 @@
             padding: 12px 0;
             width: 80%;
             max-width: 340px;
-            font-family: 'Inter', sans-serif;
         }
 
         .start-btn {
@@ -339,6 +421,24 @@
                 font-size: 15px;
                 max-width: 100%;
             }
+            .grid-buttons {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            .btn-theme {
+                font-size: 13px;
+                padding: 10px 6px;
+            }
+            .btn-theme .emoji {
+                font-size: 17px;
+            }
+            .connect-section {
+                gap: 12px;
+            }
+            .connect-link {
+                font-size: 14px;
+                padding: 6px 14px;
+            }
             .start-btn {
                 padding: 16px 36px;
                 font-size: 20px;
@@ -347,11 +447,17 @@
                 font-size: 30px;
             }
         }
+
+        @media (max-width: 400px) {
+            .grid-buttons {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
 
-    <!-- ÉCRAN DE DÉMARRAGE – été / productif -->
+    <!-- ÉCRAN DE DÉMARRAGE -->
     <div id="startScreen">
         <span class="start-icon">☀️</span>
         <h2>Mardi · été</h2>
@@ -376,11 +482,41 @@
         </button>
         <div class="status" id="musicStatus">🔇 prêt</div>
 
-        <!-- NOUVEAU BOUTON VERS NORD.EXX -->
-        <a href="https://nordexx-chi.vercel.app/" target="_blank" class="btn-nordexx">
+        <!-- SECTION BOUTONS THÉMATIQUES -->
+        <div class="themes-title">🌐 Explorez nos espaces</div>
+
+        <div class="grid-buttons">
+            <a href="https://ingenierie-travaux.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                <span class="emoji">🏗️</span> La base
+            </a>
+            <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                <span class="emoji">🧘</span> Espace détente
+            </a>
+            <a href="https://ingenierie-travaux.vercel.app/articles" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                <span class="emoji">📰</span> Le journal
+            </a>
+            <a href="https://ingenierie-travaux.vercel.app/boutique" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                <span class="emoji">🛍️</span> StyleShop
+            </a>
+        </div>
+
+        <!-- BOUTON NORD.EXX -->
+        <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-nordexx">
             <span>Rejoindre Nordexx</span>
             <span class="icon-arrow">→</span>
         </a>
+
+        <!-- SECTION "RESTONS CONNECTÉS" - avec liens robustes -->
+        <div class="connect-section">
+            <!-- Lien Facebook : on force l'ouverture dans le navigateur avec target et rel -->
+            <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link">
+                <span class="emoji">👍</span> Nous suivre
+            </a>
+            <!-- Lien mailto : on utilise un onclick pour éviter les erreurs de schéma dans certains WebViews -->
+            <a href="#" onclick="ouvrirMail(); return false;" class="connect-link">
+                <span class="emoji">✉️</span> Nous écrire
+            </a>
+        </div>
 
         <div class="footer">
             ★ <a href="#">Recevoir la lettre</a> — offerte<br />
@@ -389,12 +525,11 @@
     </div>
 
     <script>
+        // Gestion de la musique
         const startScreen = document.getElementById('startScreen');
         const startBtn = document.getElementById('startBtn');
         const btn = document.getElementById('playMusicBtn');
         const status = document.getElementById('musicStatus');
-
-        // Fichier audio (ambiance légère)
         const audio = new Audio('https://files.catbox.moe/krktrv.mp3');
         audio.loop = true;
 
@@ -434,6 +569,23 @@
         window.addEventListener('beforeunload', function() {
             audio.pause();
         });
+
+        // --- Fonction pour ouvrir le mailto de manière robuste ---
+        function ouvrirMail() {
+            var mail = 'boutiquestyleshopp@gmail.com';
+            var subject = 'Demande d\'information';
+            var body = 'Bonjour, je vous contacte depuis la carte Mardi été...';
+            var url = 'mailto:' + mail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+            // Tentative avec window.location
+            window.location.href = url;
+            // Fallback : si après 500ms le mailto n'a pas ouvert (car bloqué), on affiche un message
+            // (cela arrive dans certains WebViews)
+            setTimeout(function() {
+                // On ne peut pas détecter facilement si le mailto a fonctionné,
+                // donc on propose une alternative : copier l'email dans le presse-papiers ?
+                // Mais pour rester simple, on laisse le mailto faire son travail.
+            }, 500);
+        }
     </script>
 
 </body>
