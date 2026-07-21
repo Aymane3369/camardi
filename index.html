@@ -41,9 +41,30 @@
             box-shadow: 0 20px 56px rgba(0, 0, 0, 0.08);
         }
 
+        /* --- BLOC 1 : EN-TÊTE / SAISON --- */
+        .block-header {
+            background: linear-gradient(135deg, #fcf8f3 0%, #f5ede4 100%);
+            border-radius: 32px;
+            padding: 24px 20px 20px;
+            margin-bottom: 20px;
+            border: 1px solid #e8ded4;
+            transition: all 0.4s ease;
+            animation: floatHeader 6s ease-in-out infinite;
+        }
+
+        .block-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+        }
+
+        @keyframes floatHeader {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-4px); }
+        }
+
         .badge-saison {
             display: inline-block;
-            background: #eae3da;
+            background: #dccfc0;
             color: #4d3e32;
             font-size: 13px;
             font-weight: 600;
@@ -52,7 +73,7 @@
             padding: 6px 22px;
             border-radius: 60px;
             margin-bottom: 12px;
-            border: 1px solid #d6cbbc;
+            border: 1px solid #c9b8a6;
         }
 
         .icon-saison {
@@ -80,33 +101,292 @@
         .sous-titre {
             font-size: 16px;
             color: #7a685a;
-            margin: 10px 0 22px;
+            margin: 10px 0 0;
             letter-spacing: 0.3px;
-            border-top: 1px solid #ede7e0;
-            padding-top: 16px;
             font-weight: 400;
-            background: #faf7f3;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 60px;
-            padding: 12px 16px;
+            padding: 10px 18px;
             display: inline-block;
             backdrop-filter: blur(4px);
+            border: 1px solid #e0d5ca;
         }
 
-        /* --- BLOC DATE / HEURE / MÉTÉO (version animée) --- */
+        /* --- BLOC 2 : EXPLOREZ NOS ESPACES --- */
+        .block-explore {
+            background: linear-gradient(145deg, #f5f0ea 0%, #ece4db 100%);
+            border-radius: 32px;
+            padding: 24px 22px 22px;
+            margin: 8px 0 24px;
+            border: 1px solid #ddd2c6;
+            transition: all 0.4s ease;
+            animation: pulseExplore 8s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .block-explore::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 40%, rgba(255, 215, 175, 0.08) 0%, transparent 60%);
+            animation: shimmerExplore 12s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmerExplore {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulseExplore {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.002); }
+        }
+
+        .block-explore:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 32px rgba(180, 150, 120, 0.12);
+            border-color: #c9b8a6;
+        }
+
+        .themes-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #3d322a;
+            margin-bottom: 16px;
+            letter-spacing: 0.5px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .themes-title .icon-title {
+            display: inline-block;
+            animation: rotateIcon 6s linear infinite;
+        }
+
+        @keyframes rotateIcon {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .grid-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-theme {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #ffffff;
+            border: 1.5px solid #d6cbbc;
+            padding: 12px 8px;
+            border-radius: 60px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #2c241e;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.2px;
+            box-shadow: 0 2px 0 #ddd2c6;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-theme::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(180, 150, 120, 0.1);
+            transition: width 0.6s ease, height 0.6s ease, top 0.6s ease, left 0.6s ease;
+        }
+
+        .btn-theme:hover::after {
+            width: 300%;
+            height: 300%;
+            top: -100%;
+            left: -100%;
+        }
+
+        .btn-theme:hover {
+            transform: translateY(-3px) scale(1.02);
+            background: #ffffff;
+            border-color: #b09b8a;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .btn-theme:active {
+            transform: translateY(2px) scale(0.98);
+            box-shadow: none;
+        }
+
+        .btn-theme .emoji {
+            font-size: 20px;
+            line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-theme .label {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Couleurs individuelles pour chaque bouton */
+        .btn-theme:nth-child(1) {
+            border-color: #c9b8a6;
+        }
+        .btn-theme:nth-child(1):hover {
+            border-color: #a88b78;
+            background: #fcf8f3;
+        }
+
+        .btn-theme:nth-child(2) {
+            border-color: #bdd4c0;
+        }
+        .btn-theme:nth-child(2):hover {
+            border-color: #8fb094;
+            background: #f5faf5;
+        }
+
+        .btn-theme:nth-child(3) {
+            border-color: #d4c4b8;
+        }
+        .btn-theme:nth-child(3):hover {
+            border-color: #b8a08f;
+            background: #faf6f0;
+        }
+
+        .btn-theme:nth-child(4) {
+            border-color: #d4c8c0;
+        }
+        .btn-theme:nth-child(4):hover {
+            border-color: #b8a698;
+            background: #faf5f0;
+        }
+
+        /* Bouton Nordexx */
+        .btn-nordexx {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid #2c241e;
+            padding: 14px 34px;
+            border-radius: 80px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c241e;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            text-decoration: none;
+            margin-top: 14px;
+            width: 100%;
+            max-width: 280px;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .btn-nordexx::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .btn-nordexx:hover::before {
+            left: 100%;
+        }
+
+        .btn-nordexx:hover {
+            background: #2c241e;
+            color: #fcf8f3;
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-nordexx:active {
+            transform: translateY(2px) scale(0.98);
+        }
+
+        .btn-nordexx .icon-arrow {
+            font-size: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-nordexx:hover .icon-arrow {
+            transform: translateX(6px);
+        }
+
+        /* --- BLOC 3 : AMBIANCE (date/heure/météo/citation/audio) --- */
+        .block-ambiance {
+            background: linear-gradient(145deg, #faf7f3 0%, #f0ebe5 100%);
+            border-radius: 32px;
+            padding: 22px 20px 20px;
+            border: 1px solid #e7dfd6;
+            transition: all 0.4s ease;
+            animation: breatheAmbiance 5s ease-in-out infinite;
+        }
+
+        @keyframes breatheAmbiance {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(200, 185, 170, 0); }
+            50% { box-shadow: 0 0 20px 4px rgba(200, 185, 170, 0.06); }
+        }
+
+        .block-ambiance:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+        }
+
+        /* --- BLOC DATE / HEURE / MÉTÉO --- */
         .datetime-block {
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 6px;
-            background: #faf7f3;
-            border-radius: 32px;
-            padding: 16px 22px;
-            margin: 8px 0 18px;
-            border: 1px solid #e7dfd6;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 28px;
+            padding: 16px 20px;
+            margin: 0 0 16px;
+            border: 1px solid #ddd2c6;
             backdrop-filter: blur(4px);
             font-size: 15px;
             font-weight: 450;
             color: #2c241e;
+            transition: all 0.3s ease;
+            animation: pulseDatetime 6s ease-in-out infinite;
+        }
+
+        @keyframes pulseDatetime {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.97; }
+        }
+
+        .datetime-block:hover {
+            border-color: #c9b8a6;
+            background: rgba(255, 255, 255, 0.7);
         }
 
         .datetime-block .row {
@@ -133,6 +413,12 @@
             font-weight: 600;
             color: #4d3e32;
             border: 1px solid #d6cbbc;
+            transition: all 0.3s ease;
+        }
+
+        .datetime-block .week-number:hover {
+            background: #dccfc0;
+            transform: scale(1.05);
         }
 
         .datetime-block .date-part {
@@ -159,10 +445,27 @@
             border: 1px solid #ddd2c6;
             animation: pulseMeteo 3s ease-in-out infinite;
             cursor: default;
+            transition: all 0.3s ease;
+        }
+
+        .datetime-block .weather-part:hover {
+            background: rgba(235, 225, 215, 0.7);
+            transform: scale(1.02);
+        }
+
+        @keyframes pulseMeteo {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.03); }
         }
 
         .datetime-block .weather-part .weather-emoji {
             font-size: 22px;
+            animation: spinWeather 8s ease-in-out infinite;
+        }
+
+        @keyframes spinWeather {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(10deg); }
         }
 
         .datetime-block .weather-part .weather-temp {
@@ -180,33 +483,6 @@
             font-size: 18px;
         }
 
-        /* --- ANIMATIONS --- */
-        @keyframes apparition {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes pulseMeteo {
-            0%, 100% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.03);
-            }
-        }
-
-        @keyframes doux-levier {
-            0% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-6px) rotate(4deg); }
-            100% { transform: translateY(0) rotate(0deg); }
-        }
-
         /* --- BOUTON POSITION --- */
         .btn-position {
             display: inline-flex;
@@ -221,7 +497,7 @@
             font-weight: 500;
             color: #4d3e32;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-family: 'Inter', sans-serif;
             margin-top: 6px;
         }
@@ -229,7 +505,8 @@
         .btn-position:hover {
             background: #eae3da;
             border-color: #b09b8a;
-            transform: translateY(-2px);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
         }
 
         .btn-position:active {
@@ -238,24 +515,69 @@
 
         .btn-position i {
             font-size: 14px;
+            transition: transform 0.3s ease;
         }
 
+        .btn-position:hover i {
+            transform: scale(1.2);
+        }
+
+        /* --- MESSAGE / CITATION --- */
         .message {
             font-size: 19px;
             line-height: 1.7;
             color: #2f2721;
-            background: #faf7f3;
+            background: rgba(255, 255, 255, 0.6);
             border-radius: 28px;
             padding: 24px 24px;
-            margin: 16px 0 28px;
+            margin: 16px 0 24px;
             font-weight: 400;
             border: 1px solid #e7dfd6;
             box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: all 0.4s ease;
+            animation: glowMessage 4s ease-in-out infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .message::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(ellipse at 30% 20%, rgba(255, 215, 175, 0.05) 0%, transparent 60%);
+            animation: shimmerMessage 10s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmerMessage {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glowMessage {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(180, 150, 120, 0); }
+            50% { box-shadow: 0 0 30px 4px rgba(180, 150, 120, 0.04); }
+        }
+
+        .message:hover {
+            transform: translateY(-2px);
+            border-color: #c9b8a6;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
         }
 
         .message strong {
             color: #b18d72;
             font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        .message span {
+            position: relative;
+            z-index: 1;
         }
 
         /* BOUTON MUSIQUE */
@@ -272,136 +594,110 @@
             font-weight: 500;
             color: #fcf8f3;
             cursor: pointer;
-            transition: 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             box-shadow: 0 4px 0 #1a1410, 0 4px 16px rgba(0, 0, 0, 0.08);
             font-family: 'Inter', sans-serif;
             letter-spacing: 0.3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .music-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+            animation: shimmerBtn 4s linear infinite;
+            pointer-events: none;
+        }
+
+        @keyframes shimmerBtn {
+            0% { transform: translate(-30%, -30%) rotate(0deg); }
+            100% { transform: translate(30%, 30%) rotate(360deg); }
+        }
+
+        /* Version "Couper le son" : plus petit */
+        .music-btn.small {
+            padding: 10px 20px;
+            font-size: 14px;
+            gap: 8px;
+            box-shadow: 0 2px 0 #1a1410, 0 2px 8px rgba(0, 0, 0, 0.06);
+        }
+
+        .music-btn.small .icon {
+            font-size: 18px;
         }
 
         .music-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
             box-shadow: 0 6px 0 #1a1410, 0 8px 24px rgba(0, 0, 0, 0.12);
             background: #3d322a;
         }
 
+        .music-btn.small:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 4px 0 #1a1410, 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
         .music-btn:active {
-            transform: translateY(2px);
+            transform: translateY(2px) scale(0.98);
             box-shadow: 0 2px 0 #1a1410;
+        }
+
+        .music-btn.small:active {
+            box-shadow: 0 1px 0 #1a1410;
         }
 
         .music-btn .icon {
             font-size: 24px;
             line-height: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .music-btn .btn-text {
+            position: relative;
+            z-index: 1;
         }
 
         .status {
-            margin-top: 20px;
+            margin-top: 16px;
             font-size: 15px;
             color: #7a685a;
             font-weight: 450;
             min-height: 28px;
-            background: #f3eee8;
+            background: rgba(255, 255, 255, 0.5);
             display: inline-block;
             padding: 5px 28px;
             border-radius: 60px;
             border: 1px solid #e0d5ca;
+            transition: all 0.3s ease;
         }
 
-        /* --- BOUTONS THÉMATIQUES --- */
-        .themes-title {
-            font-size: 18px;
-            font-weight: 600;
-            color: #2c241e;
-            margin: 24px 0 16px;
-            letter-spacing: 0.5px;
-            border-top: 1px solid #ede7e0;
-            padding-top: 24px;
+        .status:hover {
+            background: rgba(255, 255, 255, 0.8);
+            transform: scale(1.02);
         }
 
-        .grid-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 12px;
+        /* --- ANIMATIONS --- */
+        @keyframes apparition {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .btn-theme {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            background: #faf7f3;
-            border: 1.5px solid #d6cbbc;
-            padding: 12px 8px;
-            border-radius: 60px;
-            font-size: 15px;
-            font-weight: 500;
-            color: #2c241e;
-            text-decoration: none;
-            transition: 0.2s ease;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.2px;
-            box-shadow: 0 2px 0 #ddd2c6;
-        }
-
-        .btn-theme:hover {
-            transform: translateY(-2px);
-            background: #ffffff;
-            border-color: #b09b8a;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-        }
-
-        .btn-theme:active {
-            transform: translateY(2px);
-            box-shadow: none;
-        }
-
-        .btn-theme .emoji {
-            font-size: 20px;
-            line-height: 1;
-        }
-
-        /* Bouton Nordexx */
-        .btn-nordexx {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: transparent;
-            border: 2px solid #2c241e;
-            padding: 14px 34px;
-            border-radius: 80px;
-            font-size: 17px;
-            font-weight: 600;
-            color: #2c241e;
-            cursor: pointer;
-            transition: 0.2s ease;
-            text-decoration: none;
-            margin-top: 12px;
-            width: 100%;
-            max-width: 280px;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
-        }
-
-        .btn-nordexx:hover {
-            background: #2c241e;
-            color: #fcf8f3;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn-nordexx:active {
-            transform: translateY(2px);
-        }
-
-        .btn-nordexx .icon-arrow {
-            font-size: 20px;
-            transition: 0.2s;
-        }
-
-        .btn-nordexx:hover .icon-arrow {
-            transform: translateX(4px);
+        @keyframes doux-levier {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(4deg); }
+            100% { transform: translateY(0) rotate(0deg); }
         }
 
         /* --- SECTION "RESTONS CONNECTÉS" --- */
@@ -427,7 +723,7 @@
             border-radius: 40px;
             background: #faf7f3;
             border: 1px solid #d6cbbc;
-            transition: 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-family: 'Inter', sans-serif;
             cursor: pointer;
         }
@@ -435,14 +731,23 @@
         .connect-link:hover {
             background: #ffffff;
             border-color: #b09b8a;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.06);
+        }
+
+        .connect-link:active {
+            transform: scale(0.95);
         }
 
         .connect-link i {
             font-size: 18px;
             width: 20px;
             text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .connect-link:hover i {
+            transform: scale(1.2);
         }
 
         .connect-link .emoji {
@@ -500,12 +805,13 @@
             font-weight: 500;
             border-bottom: 2px solid #ded3c8;
             padding-bottom: 2px;
-            transition: 0.15s;
+            transition: all 0.3s ease;
         }
 
         .footer a:hover {
             border-bottom-color: #7a685a;
             color: #2c241e;
+            transform: scale(1.02);
         }
 
         /* ===== ÉCRAN DE DÉMARRAGE ===== */
@@ -563,19 +869,19 @@
             color: #fcf8f3;
             cursor: pointer;
             box-shadow: 0 6px 0 #1a1410, 0 4px 20px rgba(0, 0, 0, 0.08);
-            transition: 0.15s ease;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-family: 'Inter', sans-serif;
             letter-spacing: 0.5px;
         }
 
         .start-btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-4px) scale(1.02);
             box-shadow: 0 8px 0 #1a1410, 0 8px 28px rgba(0, 0, 0, 0.12);
             background: #3d322a;
         }
 
         .start-btn:active {
-            transform: translateY(3px);
+            transform: translateY(3px) scale(0.98);
             box-shadow: 0 2px 0 #1a1410;
         }
 
@@ -588,18 +894,34 @@
 
         @media (max-width: 480px) {
             .card {
-                padding: 32px 18px 32px;
+                padding: 28px 16px 32px;
                 border-radius: 32px;
             }
             h1 {
                 font-size: 28px;
             }
+            .block-header {
+                padding: 18px 16px 16px;
+            }
+            .block-explore {
+                padding: 18px 16px 18px;
+            }
+            .block-ambiance {
+                padding: 18px 16px 16px;
+            }
             .message {
                 font-size: 17px;
-                padding: 20px 16px;
+                padding: 18px 16px;
             }
             .music-btn {
                 padding: 14px 28px;
+                font-size: 16px;
+            }
+            .music-btn.small {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+            .music-btn.small .icon {
                 font-size: 16px;
             }
             .btn-nordexx {
@@ -633,7 +955,7 @@
                 font-size: 30px;
             }
             .datetime-block {
-                padding: 14px 16px;
+                padding: 12px 14px;
                 gap: 4px;
             }
             .datetime-block .row {
@@ -654,6 +976,10 @@
             .datetime-block .week-number {
                 font-size: 12px;
                 padding: 3px 12px;
+            }
+            .sous-titre {
+                font-size: 14px;
+                padding: 8px 14px;
             }
         }
 
@@ -676,71 +1002,87 @@
 
     <!-- CARTE -->
     <div class="card">
-        <span class="badge-saison" id="badgeSaison">☀️ saison</span>
-        <span class="icon-saison" id="iconSaison">🌻</span>
-        <h1 id="mainTitle">Bonjour <span>jour</span></h1>
-        <div class="sous-titre" id="dailySubtitle">✧ douceur & légèreté ✧</div>
+        <!-- ============================================================ -->
+        <!-- BLOC 1 : EN-TÊTE / SAISON -->
+        <!-- ============================================================ -->
+        <div class="block-header">
+            <span class="badge-saison" id="badgeSaison">☀️ saison</span>
+            <span class="icon-saison" id="iconSaison">🌻</span>
+            <h1 id="mainTitle">Bonjour <span>☀️</span></h1>
+            <div class="sous-titre" id="dailySubtitle">✧ douceur & légèreté ✧</div>
+        </div>
 
-        <!-- BLOC DATE / HEURE / MÉTÉO (version animée) -->
-        <div class="datetime-block">
-            <div class="row">
-                <span class="row-item week-number">
-                    ✨ Semaine <span id="weekDisplay">--</span>
-                </span>
-                <span class="row-item date-part">
-                    📅 <span id="dateDisplay">--</span>
-                </span>
-                <span class="row-item time-part">
-                    🕒 <span id="timeDisplay">--:--</span>
-                    <span class="seconds" id="secondsDisplay">:--</span>
-                </span>
+        <!-- ============================================================ -->
+        <!-- BLOC 2 : EXPLOREZ NOS ESPACES -->
+        <!-- ============================================================ -->
+        <div class="block-explore">
+            <div class="themes-title"><span class="icon-title">🌐</span> Explorez nos espaces</div>
+            <div class="grid-buttons">
+                <a href="https://ingenierie-travaux.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                    <span class="emoji">🏗️</span>
+                    <span class="label">La base</span>
+                </a>
+                <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                    <span class="emoji">🧘</span>
+                    <span class="label">Espace détente</span>
+                </a>
+                <a href="https://ingenierie-travaux.vercel.app/articles" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                    <span class="emoji">📰</span>
+                    <span class="label">Le journal</span>
+                </a>
+                <a href="https://ingenierie-travaux.vercel.app/boutique" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                    <span class="emoji">🛍️</span>
+                    <span class="label">StyleShop</span>
+                </a>
             </div>
-            <div class="row">
-                <span class="row-item weather-part" id="weatherDisplay">
-                    <span class="weather-emoji" id="weatherEmoji">☀️</span>
-                    <span class="weather-temp" id="weatherTemp">--°C</span>
-                    <span class="weather-city" id="weatherCity">📍 --</span>
-                </span>
-                <button class="btn-position" id="btnPosition" title="Utiliser ma position précise">
-                    <i class="fas fa-location-dot"></i> Ma position
-                </button>
+            <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-nordexx">
+                <span>Rejoindre Nordexx</span>
+                <span class="icon-arrow">→</span>
+            </a>
+        </div>
+
+        <!-- ============================================================ -->
+        <!-- BLOC 3 : AMBIANCE -->
+        <!-- ============================================================ -->
+        <div class="block-ambiance">
+            <!-- BLOC DATE / HEURE / MÉTÉO -->
+            <div class="datetime-block">
+                <div class="row">
+                    <span class="row-item week-number">
+                        ✨ Semaine <span id="weekDisplay">--</span>
+                    </span>
+                    <span class="row-item date-part">
+                        📅 <span id="dateDisplay">--</span>
+                    </span>
+                    <span class="row-item time-part">
+                        🕒 <span id="timeDisplay">--:--</span>
+                        <span class="seconds" id="secondsDisplay">:--</span>
+                    </span>
+                </div>
+                <div class="row">
+                    <span class="row-item weather-part" id="weatherDisplay">
+                        <span class="weather-emoji" id="weatherEmoji">☀️</span>
+                        <span class="weather-temp" id="weatherTemp">--°C</span>
+                        <span class="weather-city" id="weatherCity">📍 --</span>
+                    </span>
+                    <button class="btn-position" id="btnPosition" title="Utiliser ma position précise">
+                        <i class="fas fa-location-dot"></i> Ma position
+                    </button>
+                </div>
             </div>
+
+            <!-- MESSAGE DYNAMIQUE (citation) -->
+            <div class="message">
+                <strong>“</strong> <span id="dailyMessage">--</span> <strong>”</strong>
+            </div>
+
+            <!-- CONTROLE AUDIO -->
+            <button class="music-btn" id="playMusicBtn">
+                <span class="icon">🎧</span>
+                <span class="btn-text">Lancer l’ambiance</span>
+            </button>
+            <div class="status" id="musicStatus">🔇 prêt</div>
         </div>
-
-        <!-- MESSAGE DYNAMIQUE -->
-        <div class="message">
-            <strong>“</strong> <span id="dailyMessage">--</span> <strong>”</strong>
-        </div>
-
-        <button class="music-btn" id="playMusicBtn">
-            <span class="icon">🎧</span>
-            Lancer l’ambiance
-        </button>
-        <div class="status" id="musicStatus">🔇 prêt</div>
-
-        <!-- SECTION BOUTONS THÉMATIQUES -->
-        <div class="themes-title">🌐 Explorez nos espaces</div>
-
-        <div class="grid-buttons">
-            <a href="https://ingenierie-travaux.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                <span class="emoji">🏗️</span> La base
-            </a>
-            <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                <span class="emoji">🧘</span> Espace détente
-            </a>
-            <a href="https://ingenierie-travaux.vercel.app/articles" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                <span class="emoji">📰</span> Le journal
-            </a>
-            <a href="https://ingenierie-travaux.vercel.app/boutique" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                <span class="emoji">🛍️</span> StyleShop
-            </a>
-        </div>
-
-        <!-- BOUTON NORD.EXX -->
-        <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-nordexx">
-            <span>Rejoindre Nordexx</span>
-            <span class="icon-arrow">→</span>
-        </a>
 
         <!-- SECTION "RESTONS CONNECTÉS" -->
         <div class="connect-section">
@@ -753,11 +1095,9 @@
             <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link facebook-btn">
                 <i class="fa-brands fa-facebook"></i> Nous suivre
             </a>
-            <!-- BOUTON GMAIL AVEC ICÔNE ET EMAIL -->
             <a href="#" onclick="ouvrirMail(); return false;" class="connect-link gmail-btn">
                 <i class="fa-brands fa-google"></i> Gmail
             </a>
-            <!-- BOUTON PARTAGER AVEC ICÔNE FONT AWESOME -->
             <button class="connect-link" onclick="partagerCarte(); return false;" style="background:#faf7f3;border:1px solid #d6cbbc;font-family:inherit;cursor:pointer;">
                 <i class="fa-solid fa-share-nodes"></i> Partager
             </button>
@@ -819,9 +1159,6 @@
                 Samedi: "✧ liberté & inspiration ✧"
             };
 
-            /**
-             * Détermine la saison en fonction de la date
-             */
             function getSaison(date) {
                 const m = date.getMonth() + 1;
                 const j = date.getDate();
@@ -838,9 +1175,6 @@
                 return { nom: "hiver", emoji: "❄️", ambiance: "paisible", icone: "❄️" };
             }
 
-            /**
-             * Numéro de semaine ISO
-             */
             function getWeekNumber(date) {
                 const d = new Date(date);
                 d.setHours(0, 0, 0, 0);
@@ -850,19 +1184,11 @@
                 return Math.floor((jeudi - debutAnnee) / 86400000 / 7) + 1;
             }
 
-            /**
-             * Retourne la salutation appropriée selon l'heure
-             */
             function getSalutation(heure) {
-                if (heure >= 5 && heure < 12) {
-                    return 'Bonjour';
-                } else if (heure >= 12 && heure < 18) {
-                    return 'Bon après-midi';
-                } else if (heure >= 18 && heure < 22) {
-                    return 'Bonsoir';
-                } else {
-                    return 'Bonne nuit';
-                }
+                if (heure >= 5 && heure < 12) return 'Bonjour';
+                if (heure >= 12 && heure < 18) return 'Bon après-midi';
+                if (heure >= 18 && heure < 22) return 'Bonsoir';
+                return 'Bonne nuit';
             }
 
             function mettreAJour() {
@@ -872,60 +1198,44 @@
                 const jourNom = jours[jour];
                 const heure = now.getHours();
 
-                // ---- Date ----
                 const dateStr = jourNom + ' ' + now.getDate() + ' ' + mois[now.getMonth()] + ' ' + now.getFullYear();
                 dateDisplay.textContent = dateStr;
 
-                // ---- Heure ----
                 const h = String(now.getHours()).padStart(2, '0');
                 const min = String(now.getMinutes()).padStart(2, '0');
                 const sec = String(now.getSeconds()).padStart(2, '0');
                 timeDisplay.textContent = h + ':' + min;
                 secondsDisplay.textContent = ':' + sec;
 
-                // ---- Semaine ----
                 weekDisplay.textContent = getWeekNumber(now);
-
-                // ---- Icônes ----
                 iconSaison.textContent = saison.icone;
                 startIcon.textContent = saison.emoji;
 
-                // ---- BADGE DYNAMIQUE : UNIQUEMENT "emoji saison" ----
                 badgeSaison.textContent = saison.emoji + ' ' + saison.nom;
 
-                // ---- TITRE PAGE DYNAMIQUE : JOUR + SAISON + AMBIANCE ----
                 let titreComplet = jourNom + ' · ' + saison.nom + ' · ' + saison.ambiance;
                 splashTitle.textContent = titreComplet;
                 pageTitle.textContent = titreComplet;
                 document.title = titreComplet;
 
-                // ---- TITRE PRINCIPAL : Salutation adaptée à l'heure ----
                 const salutation = getSalutation(heure);
                 const emojiSalutation = heure >= 5 && heure < 12 ? '☀️' :
                                        heure >= 12 && heure < 18 ? '🌤️' :
                                        heure >= 18 && heure < 22 ? '🌅' : '🌙';
                 mainTitle.innerHTML = salutation + ' <span>' + emojiSalutation + '</span>';
 
-                // ---- SOUS-TITRES ----
                 splashSub.textContent = 'bienvenue · ' + saison.ambiance + ' · présent';
                 footerYear.textContent = saison.nom + ' ' + now.getFullYear() + ' · sans distraction';
-
-                // ---- MESSAGE DU JOUR ----
                 dailyMessage.textContent = messagesJour[jourNom] || 'Chaque jour est une nouvelle page, chaque instant une opportunité.';
-
-                // ---- SOUS-TITRE DU JOUR ----
                 dailySubtitle.textContent = sousTitresJour[jourNom] || '✧ douceur & légèreté ✧';
             }
 
-            // Exécution immédiate + intervalle
             mettreAJour();
             setInterval(mettreAJour, 1000);
         })();
 
         // ============================================================
         // 2. MÉTÉO AMÉLIORÉE : GPS PRIORITAIRE + IP FALLBACK
-        //    EMOJI INTELLIGENT SELON L'HEURE
-        //    LOGS DÉTAILLÉS DANS LA CONSOLE
         // ============================================================
         (function initWeather() {
             const weatherEmoji = document.getElementById('weatherEmoji');
@@ -933,18 +1243,12 @@
             const weatherCity = document.getElementById('weatherCity');
 
             let villeParDefaut = 'Lyon';
-            let currentLat = null;
-            let currentLon = null;
-            let sourceActuelle = 'Inconnue';
 
-            /**
-             * Fonction principale : détermine l'emoji météo selon le code WMO et l'heure             */
             function getWeatherEmoji(code) {
                 const now = new Date();
                 const heure = now.getHours();
                 const estNuit = (heure >= 18 || heure < 6);
 
-                // Mapping des codes WMO vers des catégories
                 const categories = {
                     clear: [0],
                     mostlyClear: [1],
@@ -967,50 +1271,21 @@
                     }
                 }
 
-                // Emojis de jour
                 const emojisJour = {
-                    clear: '☀️',
-                    mostlyClear: '🌤️',
-                    partlyCloudy: '⛅',
-                    overcast: '☁️',
-                    fog: '🌫️',
-                    drizzle: '🌦️',
-                    rain: '🌧️',
-                    snow: '❄️',
-                    showers: '🌧️',
-                    snowShowers: '❄️',
-                    thunderstorm: '⛈️',
-                    unknown: '🌍'
+                    clear: '☀️', mostlyClear: '🌤️', partlyCloudy: '⛅', overcast: '☁️',
+                    fog: '🌫️', drizzle: '🌦️', rain: '🌧️', snow: '❄️',
+                    showers: '🌧️', snowShowers: '❄️', thunderstorm: '⛈️', unknown: '🌍'
                 };
 
-                // Emojis de nuit
                 const emojisNuit = {
-                    clear: '🌙',
-                    mostlyClear: '🌙',
-                    partlyCloudy: '🌙☁️',
-                    overcast: '☁️',
-                    fog: '🌫️',
-                    drizzle: '🌧️',
-                    rain: '🌧️',
-                    snow: '❄️',
-                    showers: '🌧️',
-                    snowShowers: '❄️',
-                    thunderstorm: '⛈️',
-                    unknown: '🌍'
+                    clear: '🌙', mostlyClear: '🌙', partlyCloudy: '🌙☁️', overcast: '☁️',
+                    fog: '🌫️', drizzle: '🌧️', rain: '🌧️', snow: '❄️',
+                    showers: '🌧️', snowShowers: '❄️', thunderstorm: '⛈️', unknown: '🌍'
                 };
 
-                // Choisir l'emoji selon le jour ou la nuit
-                const emoji = estNuit ? emojisNuit[category] || emojisNuit.unknown : emojisJour[category] || emojisJour.unknown;
-
-                // Log pour le débogage
-                console.log(`🕐 ${estNuit ? '🌙 Nuit' : '☀️ Jour'} - Code ${code} → ${emoji}`);
-
-                return emoji;
+                return estNuit ? emojisNuit[category] || emojisNuit.unknown : emojisJour[category] || emojisJour.unknown;
             }
 
-            /**
-             * Récupère le nom de la ville via l'API de géocodage
-             */
             async function getCityName(lat, lon) {
                 try {
                     const url = `https://geocoding-api.open-meteo.com/v1/search?latitude=${lat}&longitude=${lon}&count=1&language=fr`;
@@ -1027,18 +1302,12 @@
                 }
             }
 
-            /**
-             * Charge la météo à partir de coordonnées précises
-             */
             async function chargerMeteoAvecCoords(lat, lon, villeSuggestion, source) {
                 try {
                     if (!lat || !lon) throw new Error('Coordonnées manquantes');
-
-                    // Récupérer le nom de la ville
                     let ville = await getCityName(lat, lon);
                     if (!ville) ville = villeSuggestion || villeParDefaut;
 
-                    // Appel à l'API Open-Meteo
                     const meteoResponse = await fetch(
                         `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code`
                     );
@@ -1048,17 +1317,10 @@
                     const temperature = Math.round(meteo.current.temperature_2m);
                     const code = meteo.current.weather_code;
 
-                    // Mise à jour de l'affichage
                     weatherEmoji.textContent = getWeatherEmoji(code);
                     weatherTemp.textContent = temperature + '°C';
                     weatherCity.textContent = '📍 ' + ville;
 
-                    // Sauvegarde des coordonnées et de la source
-                    currentLat = lat;
-                    currentLon = lon;
-                    sourceActuelle = source;
-
-                    // Logs détaillés dans la console
                     console.log('========================================');
                     console.log('🌤️ MÉTÉO MISE À JOUR');
                     console.log(`📍 Source : ${source}`);
@@ -1066,7 +1328,6 @@
                     console.log(`🏙️ Ville : ${ville}`);
                     console.log(`🌡️ Température : ${temperature}°C`);
                     console.log(`🔢 Code météo : ${code}`);
-                    console.log(`🎨 Emoji : ${weatherEmoji.textContent}`);
                     console.log('========================================');
 
                 } catch (error) {
@@ -1077,23 +1338,16 @@
                 }
             }
 
-            /**
-             * Charge la météo via l'IP (fallback)
-             */
             async function chargerMeteoParIP() {
                 try {
-                    console.log('📡 Tentative de localisation par IP...');
                     const ipResponse = await fetch('https://ipapi.co/json/');
                     if (!ipResponse.ok) throw new Error('IP API error');
                     const location = await ipResponse.json();
                     const lat = location.latitude;
                     const lon = location.longitude;
                     const ville = location.city || villeParDefaut;
-
                     if (lat && lon) {
                         await chargerMeteoAvecCoords(lat, lon, ville, 'IP (ipapi.co)');
-                    } else {
-                        throw new Error('Coordonnées IP manquantes');
                     }
                 } catch (error) {
                     console.log('❌ Météo IP indisponible :', error);
@@ -1103,62 +1357,33 @@
                 }
             }
 
-            /**
-             * Charge la météo via GPS (prioritaire)
-             */
             function chargerMeteoParGPS() {
                 if (!navigator.geolocation) {
-                    console.log('⚠️ Géolocalisation non supportée, fallback IP');
                     chargerMeteoParIP();
                     return;
                 }
-
-                console.log('📡 Tentative de localisation GPS...');
-                afficherToast('📍 Recherche de votre position...');
 
                 navigator.geolocation.getCurrentPosition(
                     async function(position) {
                         const lat = position.coords.latitude;
                         const lon = position.coords.longitude;
-                        console.log(`✅ GPS réussi : ${lat.toFixed(4)}, ${lon.toFixed(4)}`);
                         await chargerMeteoAvecCoords(lat, lon, null, 'GPS (navigator.geolocation)');
                         afficherToast('📍 Position GPS mise à jour');
                     },
-                    function(error) {
-                        let msg = '📍 Position non disponible';
-                        if (error.code === 1) {
-                            msg = '📍 Autorisation refusée';
-                            console.log('⚠️ Utilisateur a refusé la géolocalisation');
-                        } else if (error.code === 2) {
-                            msg = '📍 Signal GPS indisponible';
-                            console.log('⚠️ Signal GPS indisponible');
-                        } else if (error.code === 3) {
-                            msg = '📍 Délai d\'attente dépassé';
-                            console.log('⚠️ Délai d\'attente GPS dépassé');
-                        }
-                        afficherToast(msg);
-                        console.log(`📡 Fallback vers la localisation IP...`);
+                    function() {
                         chargerMeteoParIP();
                     },
-                    {
-                        enableHighAccuracy: true,
-                        timeout: 10000,
-                        maximumAge: 60000
-                    }
+                    { enableHighAccuracy: true, timeout: 10000, maximumAge: 60000 }
                 );
             }
 
-            // ---- LANCEMENT : GPS prioritaire, puis fallback IP, actualisation toutes les 15 min ----
             chargerMeteoParGPS();
-            setInterval(chargerMeteoParGPS, 900000); // 15 minutes
-
-            // ---- Événement du bouton "Ma position" ----
+            setInterval(chargerMeteoParGPS, 900000);
             document.getElementById('btnPosition').addEventListener('click', chargerMeteoParGPS);
-
         })();
 
         // ============================================================
-        // 3. MUSIQUE
+        // 3. MUSIQUE AVEC BOUTON "COUPER LE SON" PLUS PETIT
         // ============================================================
         (function initMusic() {
             const startScreen = document.getElementById('startScreen');
@@ -1172,7 +1397,8 @@
                 audio.play()
                     .then(() => {
                         status.textContent = '🎵 lecture en cours';
-                        btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
+                        btn.innerHTML = '<span class="icon">⏹</span><span class="btn-text"> Couper le son</span>';
+                        btn.classList.add('small');
                     })
                     .catch((err) => {
                         status.textContent = '⚠️ erreur de lecture';
@@ -1188,7 +1414,8 @@
                     audio.play()
                         .then(() => {
                             status.textContent = '🎵 lecture en cours';
-                            btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
+                            btn.innerHTML = '<span class="icon">⏹</span><span class="btn-text"> Couper le son</span>';
+                            btn.classList.add('small');
                         })
                         .catch((err) => {
                             status.textContent = '⚠️ erreur';
@@ -1197,7 +1424,8 @@
                 } else {
                     audio.pause();
                     status.textContent = '🔇 arrêté';
-                    btn.innerHTML = '<span class="icon">🎧</span> Lancer l’ambiance';
+                    btn.innerHTML = '<span class="icon">🎧</span><span class="btn-text"> Lancer l’ambiance</span>';
+                    btn.classList.remove('small');
                 }
             });
 
@@ -1207,14 +1435,13 @@
         })();
 
         // ============================================================
-        // 4. UTILITAIRES (mail, partage, toast)
+        // 4. UTILITAIRES
         // ============================================================
         function ouvrirMail() {
             var mail = 'boutiquestyleshopp@gmail.com';
             var subject = 'Demande d\'information';
             var body = 'Bonjour, je vous contacte depuis la carte ' + document.title + '...';
-            var url = 'mailto:' + mail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-            window.location.href = url;
+            window.location.href = 'mailto:' + mail + '?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
         }
 
         function partagerCarte() {
@@ -1224,15 +1451,8 @@
             var texte = 'Découvre cette carte ' + jourNom + ' pleine d\'énergie et de bonnes vibes !';
 
             if (navigator.share) {
-                navigator.share({
-                    title: titre,
-                    text: texte,
-                    url: url
-                }).catch(function(err) {
-                    if (err.name !== 'AbortError') {
-                        console.warn('Erreur de partage :', err);
-                        copierLien(url);
-                    }
+                navigator.share({ title: titre, text: texte, url: url }).catch(function(err) {
+                    if (err.name !== 'AbortError') copierLien(url);
                 });
             } else {
                 copierLien(url);
