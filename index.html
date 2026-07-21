@@ -173,13 +173,35 @@
             100% { transform: rotate(360deg); }
         }
 
-        .grid-buttons {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 0;
+        /* --- NOUVELLE ORGANISATION : 2 GROUPES --- */
+        .explore-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 14px;
             position: relative;
             z-index: 1;
+        }
+
+        .explore-group:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .group-label {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #7a685a;
+            text-align: left;
+            padding-left: 4px;
+            margin-bottom: 2px;
+        }
+
+        .explore-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
 
         .btn-theme {
@@ -246,38 +268,24 @@
             z-index: 1;
         }
 
-        /* Couleurs individuelles pour chaque bouton */
-        .btn-theme:nth-child(1) {
-            border-color: #c9b8a6;
-        }
-        .btn-theme:nth-child(1):hover {
-            border-color: #a88b78;
-            background: #fcf8f3;
-        }
+        /* Couleurs individuelles */
+        .btn-theme:nth-child(1) { border-color: #c9b8a6; }
+        .btn-theme:nth-child(1):hover { border-color: #a88b78; background: #fcf8f3; }
 
-        .btn-theme:nth-child(2) {
-            border-color: #bdd4c0;
-        }
-        .btn-theme:nth-child(2):hover {
-            border-color: #8fb094;
-            background: #f5faf5;
-        }
+        .btn-theme:nth-child(2) { border-color: #bdd4c0; }
+        .btn-theme:nth-child(2):hover { border-color: #8fb094; background: #f5faf5; }
 
-        .btn-theme:nth-child(3) {
-            border-color: #d4c4b8;
-        }
-        .btn-theme:nth-child(3):hover {
-            border-color: #b8a08f;
-            background: #faf6f0;
-        }
+        .btn-theme:nth-child(3) { border-color: #d4c4b8; }
+        .btn-theme:nth-child(3):hover { border-color: #b8a08f; background: #faf6f0; }
 
-        .btn-theme:nth-child(4) {
-            border-color: #d4c8c0;
-        }
-        .btn-theme:nth-child(4):hover {
-            border-color: #b8a698;
-            background: #faf5f0;
-        }
+        .btn-theme:nth-child(4) { border-color: #d4c8c0; }
+        .btn-theme:nth-child(4):hover { border-color: #b8a698; background: #faf5f0; }
+
+        .btn-theme:nth-child(5) { border-color: #d4c8c0; }
+        .btn-theme:nth-child(5):hover { border-color: #b8a698; background: #faf5f0; }
+
+        .btn-theme:nth-child(6) { border-color: #d4c8c0; }
+        .btn-theme:nth-child(6):hover { border-color: #b8a698; background: #faf5f0; }
 
         /* Bouton Nordexx */
         .btn-nordexx {
@@ -295,9 +303,8 @@
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             text-decoration: none;
-            margin-top: 14px;
+            margin-top: 4px;
             width: 100%;
-            max-width: 280px;
             font-family: 'Inter', sans-serif;
             letter-spacing: 0.3px;
             position: relative;
@@ -619,7 +626,6 @@
             100% { transform: translate(30%, 30%) rotate(360deg); }
         }
 
-        /* Version "Couper le son" : plus petit */
         .music-btn.small {
             padding: 10px 20px;
             font-size: 14px;
@@ -714,18 +720,20 @@
         .connect-link {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 8px;
-            font-size: 16px;
+            font-size: 22px;
             font-weight: 500;
             color: #2c241e;
             text-decoration: none;
-            padding: 8px 16px;
+            padding: 10px 18px;
             border-radius: 40px;
             background: #faf7f3;
             border: 1px solid #d6cbbc;
             transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
             font-family: 'Inter', sans-serif;
             cursor: pointer;
+            min-width: 48px;
         }
 
         .connect-link:hover {
@@ -740,9 +748,7 @@
         }
 
         .connect-link i {
-            font-size: 18px;
-            width: 20px;
-            text-align: center;
+            font-size: 24px;
             transition: transform 0.3s ease;
         }
 
@@ -750,21 +756,10 @@
             transform: scale(1.2);
         }
 
-        .connect-link .emoji {
-            font-size: 20px;
-        }
-
-        .connect-link.linkedin-btn i {
-            color: #0a66c2;
-        }
-
-        .connect-link.facebook-btn i {
-            color: #1877f2;
-        }
-
-        .connect-link.gmail-btn i {
-            color: #ea4335;
-        }
+        .connect-link .fa-linkedin { color: #0a66c2; }
+        .connect-link .fa-facebook { color: #1877f2; }
+        .connect-link .fa-share-nodes { color: #2c241e; }
+        .connect-link .fa-google { color: #ea4335; }
 
         /* notification de copie */
         .toast {
@@ -927,11 +922,10 @@
             .btn-nordexx {
                 padding: 12px 24px;
                 font-size: 15px;
-                max-width: 100%;
             }
-            .grid-buttons {
+            .explore-row {
                 grid-template-columns: 1fr 1fr;
-                gap: 10px;
+                gap: 8px;
             }
             .btn-theme {
                 font-size: 13px;
@@ -941,11 +935,15 @@
                 font-size: 17px;
             }
             .connect-section {
-                gap: 10px;
+                gap: 8px;
             }
             .connect-link {
-                font-size: 14px;
-                padding: 6px 12px;
+                font-size: 18px;
+                padding: 8px 14px;
+                min-width: 40px;
+            }
+            .connect-link i {
+                font-size: 20px;
             }
             .start-btn {
                 padding: 16px 36px;
@@ -981,10 +979,13 @@
                 font-size: 14px;
                 padding: 8px 14px;
             }
+            .group-label {
+                font-size: 10px;
+            }
         }
 
         @media (max-width: 400px) {
-            .grid-buttons {
+            .explore-row {
                 grid-template-columns: 1fr;
             }
         }
@@ -1017,28 +1018,48 @@
         <!-- ============================================================ -->
         <div class="block-explore">
             <div class="themes-title"><span class="icon-title">🌐</span> Explorez nos espaces</div>
-            <div class="grid-buttons">
-                <a href="https://ingenierie-travaux.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                    <span class="emoji">🏗️</span>
-                    <span class="label">La base</span>
-                </a>
-                <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                    <span class="emoji">🧘</span>
-                    <span class="label">Espace détente</span>
-                </a>
-                <a href="https://ingenierie-travaux.vercel.app/articles" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                    <span class="emoji">📰</span>
-                    <span class="label">Le journal</span>
-                </a>
-                <a href="https://ingenierie-travaux.vercel.app/boutique" target="_blank" rel="noopener noreferrer" class="btn-theme">
-                    <span class="emoji">🛍️</span>
-                    <span class="label">StyleShop</span>
-                </a>
+
+            <!-- GROUPE 1 : La base + Le journal + Beam + CV + Outils interactifs -->
+            <div class="explore-group">
+                <div class="group-label">📚 Ressources</div>
+                <div class="explore-row">
+                    <a href="https://ingenierie-travaux.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                        <span class="emoji">🏗️</span>
+                        <span class="label">La base</span>
+                    </a>
+                    <a href="https://ingenierie-travaux.vercel.app/articles" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                        <span class="emoji">📰</span>
+                        <span class="label">Le journal</span>
+                    </a>
+                    <a href="https://ingenierie-travaux.vercel.app/calcul-poutre" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                        <span class="emoji">📐</span>
+                        <span class="label">Beam</span>
+                    </a>
+                    <a href="https://cv-aymane-abidine.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                        <span class="emoji">📄</span>
+                        <span class="label">CV</span>
+                    </a>
+                    <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme" style="grid-column: 1 / -1;">
+                        <span class="emoji">💡</span>
+                        <span class="label">Outils interactifs</span>
+                    </a>
+                </div>
             </div>
-            <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-nordexx">
-                <span>Rejoindre Nordexx</span>
-                <span class="icon-arrow">→</span>
-            </a>
+
+            <!-- GROUPE 2 : Découvertes (StyleShop + Nordexx) -->
+            <div class="explore-group">
+                <div class="group-label">🛍️ Découvertes</div>
+                <div class="explore-row">
+                    <a href="https://ingenierie-travaux.vercel.app/boutique" target="_blank" rel="noopener noreferrer" class="btn-theme">
+                        <span class="emoji">📦</span>
+                        <span class="label">StyleShop</span>
+                    </a>
+                    <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme" style="grid-column: 1 / -1;">
+                        <span class="emoji">🚀</span>
+                        <span class="label">Nordexx</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
         <!-- ============================================================ -->
@@ -1084,22 +1105,19 @@
             <div class="status" id="musicStatus">🔇 prêt</div>
         </div>
 
-        <!-- SECTION "RESTONS CONNECTÉS" -->
+        <!-- SECTION "RESTONS CONNECTÉS" - ICÔNES FONT AWESOME -->
         <div class="connect-section">
-            <a href="https://www.linkedin.com/in/aymane-abidine/" target="_blank" rel="noopener noreferrer" class="connect-link linkedin-btn">
-                <i class="fa-brands fa-linkedin"></i> LinkedIn
+            <a href="https://www.linkedin.com/in/aymane-abidine/" target="_blank" rel="noopener noreferrer" class="connect-link">
+                <i class="fa-brands fa-linkedin"></i>
             </a>
-            <a href="https://cv-aymane-abidine.vercel.app/" target="_blank" rel="noopener noreferrer" class="connect-link">
-                <span class="emoji">📄</span> CV
+            <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link">
+                <i class="fa-brands fa-facebook"></i>
             </a>
-            <a href="https://www.facebook.com/profile.php?id=61590392532588" target="_blank" rel="noopener noreferrer" class="connect-link facebook-btn">
-                <i class="fa-brands fa-facebook"></i> Nous suivre
-            </a>
-            <a href="#" onclick="ouvrirMail(); return false;" class="connect-link gmail-btn">
-                <i class="fa-brands fa-google"></i> Gmail
+            <a href="#" onclick="ouvrirMail(); return false;" class="connect-link">
+                <i class="fa-brands fa-google"></i>
             </a>
             <button class="connect-link" onclick="partagerCarte(); return false;" style="background:#faf7f3;border:1px solid #d6cbbc;font-family:inherit;cursor:pointer;">
-                <i class="fa-solid fa-share-nodes"></i> Partager
+                <i class="fa-solid fa-share-nodes"></i>
             </button>
         </div>
 
