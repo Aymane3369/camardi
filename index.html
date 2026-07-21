@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mardi · été · productif</title>
+    <style>
+        /* ----- RESET & BASE ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #f7f3ed;  /* fond clair et chaleureux */
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            padding: 20px;
+        }
+
+        /* ----- CARTE PRINCIPALE ----- */
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 40px 40px 32px 32px;
+            padding: 40px 32px 44px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06), 0 2px 8px rgba(0, 0, 0, 0.03);
+            text-align: center;
+            border: 1px solid rgba(200, 185, 170, 0.25);
+            transition: 0.25s ease;
+            position: relative;
+        }
+
+        .card:hover {
+            box-shadow: 0 20px 56px rgba(0, 0, 0, 0.08);
+        }
+
+        /* EN-TÊTE : été & productivité */
+        .badge-saison {
+            display: inline-block;
+            background: #eae3da;
+            color: #4d3e32;
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 6px 22px;
+            border-radius: 60px;
+            margin-bottom: 12px;
+            font-family: 'Inter', sans-serif;
+            border: 1px solid #d6cbbc;
+        }
+
+        .icon-soleil {
+            font-size: 52px;
+            display: block;
+            margin-bottom: 2px;
+            filter: drop-shadow(0 4px 8px rgba(255, 215, 0, 0.2));
+            animation: doux-levier 3.5s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 34px;
+            font-weight: 600;
+            color: #2c241e;
+            letter-spacing: -0.5px;
+            font-family: 'Inter', sans-serif;
+            margin-top: -4px;
+        }
+
+        h1 span {
+            font-weight: 300;
+            color: #b18d72;
+            font-style: italic;
+        }
+
+        .sous-titre {
+            font-size: 16px;
+            color: #7a685a;
+            margin: 10px 0 22px;
+            letter-spacing: 0.3px;
+            border-top: 1px solid #ede7e0;
+            padding-top: 16px;
+            font-weight: 400;
+            background: #faf7f3;
+            border-radius: 60px;
+            padding: 12px 16px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+        }
+
+        .message {
+            font-size: 19px;
+            line-height: 1.7;
+            color: #2f2721;
+            background: #faf7f3;
+            border-radius: 28px;
+            padding: 24px 24px;
+            margin: 16px 0 28px;
+            font-weight: 400;
+            border: 1px solid #e7dfd6;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .message strong {
+            color: #b18d72;
+            font-weight: 600;
+        }
+
+        /* BOUTON MUSIQUE */
+        .music-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: #2c241e;
+            border: none;
+            padding: 16px 36px;
+            border-radius: 80px;
+            font-size: 18px;
+            font-weight: 500;
+            color: #fcf8f3;
+            cursor: pointer;
+            transition: 0.2s ease;
+            box-shadow: 0 4px 0 #1a1410, 0 4px 16px rgba(0, 0, 0, 0.08);
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+        }
+
+        .music-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 0 #1a1410, 0 8px 24px rgba(0, 0, 0, 0.12);
+            background: #3d322a;
+        }
+
+        .music-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 0 #1a1410;
+        }
+
+        .music-btn .icon {
+            font-size: 24px;
+            line-height: 1;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 15px;
+            color: #7a685a;
+            font-weight: 450;
+            min-height: 28px;
+            background: #f3eee8;
+            display: inline-block;
+            padding: 5px 28px;
+            border-radius: 60px;
+            border: 1px solid #e0d5ca;
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* --- NOUVEAU BOUTON NORD.EXX --- */
+        .btn-nordexx {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: transparent;
+            border: 2px solid #2c241e;
+            padding: 14px 34px;
+            border-radius: 80px;
+            font-size: 17px;
+            font-weight: 600;
+            color: #2c241e;
+            cursor: pointer;
+            transition: 0.2s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            margin-top: 12px;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .btn-nordexx:hover {
+            background: #2c241e;
+            color: #fcf8f3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-nordexx:active {
+            transform: translateY(2px);
+        }
+
+        .btn-nordexx .icon-arrow {
+            font-size: 20px;
+            transition: 0.2s;
+        }
+
+        .btn-nordexx:hover .icon-arrow {
+            transform: translateX(4px);
+        }
+
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #b09b8a;
+            border-top: 1px solid #e9e0d7;
+            padding-top: 22px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.2px;
+        }
+
+        .footer a {
+            color: #7a685a;
+            text-decoration: none;
+            font-weight: 500;
+            border-bottom: 2px solid #ded3c8;
+            padding-bottom: 2px;
+            transition: 0.15s;
+        }
+
+        .footer a:hover {
+            border-bottom-color: #7a685a;
+            color: #2c241e;
+        }
+
+        /* animation légère */
+        @keyframes doux-levier {
+            0% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-6px) rotate(4deg); }
+            100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        /* ===== ÉCRAN DE DÉMARRAGE ===== */
+        #startScreen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f7f3ed;
+            background-image: linear-gradient(145deg, #fcf8f3 0%, #f0e8df 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(6px);
+            transition: opacity 0.6s ease;
+            padding: 20px;
+            text-align: center;
+        }
+
+        #startScreen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        #startScreen h2 {
+            font-size: 38px;
+            font-weight: 600;
+            color: #2c241e;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: -1px;
+            margin-bottom: 4px;
+        }
+
+        #startScreen .sous-start {
+            font-size: 18px;
+            color: #7a685a;
+            font-weight: 400;
+            margin-bottom: 28px;
+            border-top: 1px solid #ddd2c6;
+            border-bottom: 1px solid #ddd2c6;
+            padding: 12px 0;
+            width: 80%;
+            max-width: 340px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .start-btn {
+            background: #2c241e;
+            border: none;
+            padding: 18px 54px;
+            border-radius: 80px;
+            font-size: 22px;
+            font-weight: 500;
+            color: #fcf8f3;
+            cursor: pointer;
+            box-shadow: 0 6px 0 #1a1410, 0 4px 20px rgba(0, 0, 0, 0.08);
+            transition: 0.15s ease;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.5px;
+        }
+
+        .start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 0 #1a1410, 0 8px 28px rgba(0, 0, 0, 0.12);
+            background: #3d322a;
+        }
+
+        .start-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 2px 0 #1a1410;
+        }
+
+        .start-icon {
+            font-size: 60px;
+            display: block;
+            margin-bottom: 8px;
+            animation: doux-levier 4s ease-in-out infinite;
+        }
+
+        @media (max-width: 480px) {
+            .card {
+                padding: 32px 18px 32px;
+                border-radius: 32px;
+            }
+            h1 {
+                font-size: 28px;
+            }
+            .message {
+                font-size: 17px;
+                padding: 20px 16px;
+            }
+            .music-btn {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+            .btn-nordexx {
+                padding: 12px 24px;
+                font-size: 15px;
+                max-width: 100%;
+            }
+            .start-btn {
+                padding: 16px 36px;
+                font-size: 20px;
+            }
+            #startScreen h2 {
+                font-size: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ÉCRAN DE DÉMARRAGE – été / productif -->
+    <div id="startScreen">
+        <span class="start-icon">☀️</span>
+        <h2>Mardi · été</h2>
+        <div class="sous-start">productivité · lumière · action</div>
+        <button class="start-btn" id="startBtn">▶ Démarrer</button>
+    </div>
+
+    <!-- CARTE -->
+    <div class="card">
+        <span class="badge-saison">☀️ été · mardi</span>
+        <span class="icon-soleil">🌻</span>
+        <h1>Bon mardi <span>productif</span></h1>
+        <div class="sous-titre">✧ énergie & clarté ✧</div>
+
+        <div class="message">
+            <strong>“</strong> Chaque action compte,<br /> chaque instant est une chance d’avancer. <strong>”</strong>
+        </div>
+
+        <button class="music-btn" id="playMusicBtn">
+            <span class="icon">🎧</span>
+            Lancer l’ambiance
+        </button>
+        <div class="status" id="musicStatus">🔇 prêt</div>
+
+        <!-- NOUVEAU BOUTON VERS NORD.EXX -->
+        <a href="https://nordexx-chi.vercel.app/" target="_blank" class="btn-nordexx">
+            <span>Rejoindre Nordexx</span>
+            <span class="icon-arrow">→</span>
+        </a>
+
+        <div class="footer">
+            ★ <a href="#">Recevoir la lettre</a> — offerte<br />
+            <span style="font-size:12px; color:#c4b3a2;">été 2026 · sans distraction</span>
+        </div>
+    </div>
+
+    <script>
+        const startScreen = document.getElementById('startScreen');
+        const startBtn = document.getElementById('startBtn');
+        const btn = document.getElementById('playMusicBtn');
+        const status = document.getElementById('musicStatus');
+
+        // Fichier audio (ambiance légère)
+        const audio = new Audio('https://files.catbox.moe/krktrv.mp3');
+        audio.loop = true;
+
+        function demarrerMusique() {
+            audio.play()
+                .then(() => {
+                    status.textContent = '🎵 en cours · focus';
+                    btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
+                })
+                .catch((err) => {
+                    status.textContent = '⚠️ erreur de lecture';
+                    console.warn(err);
+                });
+            startScreen.classList.add('hidden');
+        }
+
+        startBtn.addEventListener('click', demarrerMusique);
+
+        btn.addEventListener('click', function() {
+            if (audio.paused) {
+                audio.play()
+                    .then(() => {
+                        status.textContent = '🎵 en cours · focus';
+                        btn.innerHTML = '<span class="icon">⏹</span> Couper le son';
+                    })
+                    .catch((err) => {
+                        status.textContent = '⚠️ erreur';
+                        console.warn(err);
+                    });
+            } else {
+                audio.pause();
+                status.textContent = '🔇 arrêté';
+                btn.innerHTML = '<span class="icon">🎧</span> Lancer l’ambiance';
+            }
+        });
+
+        window.addEventListener('beforeunload', function() {
+            audio.pause();
+        });
+    </script>
+
+</body>
+</html>
