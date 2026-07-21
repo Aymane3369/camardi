@@ -173,7 +173,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* --- NOUVELLE ORGANISATION : 2 GROUPES --- */
+        /* --- ORGANISATION : 2 GROUPES --- */
         .explore-group {
             display: flex;
             flex-direction: column;
@@ -284,67 +284,8 @@
         .btn-theme:nth-child(5) { border-color: #d4c8c0; }
         .btn-theme:nth-child(5):hover { border-color: #b8a698; background: #faf5f0; }
 
-        .btn-theme:nth-child(6) { border-color: #d4c8c0; }
-        .btn-theme:nth-child(6):hover { border-color: #b8a698; background: #faf5f0; }
-
-        /* Bouton Nordexx */
-        .btn-nordexx {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            background: transparent;
-            border: 2px solid #2c241e;
-            padding: 14px 34px;
-            border-radius: 80px;
-            font-size: 17px;
-            font-weight: 600;
-            color: #2c241e;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-            text-decoration: none;
-            margin-top: 4px;
-            width: 100%;
-            font-family: 'Inter', sans-serif;
-            letter-spacing: 0.3px;
-            position: relative;
-            z-index: 1;
-            overflow: hidden;
-        }
-
-        .btn-nordexx::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .btn-nordexx:hover::before {
-            left: 100%;
-        }
-
-        .btn-nordexx:hover {
-            background: #2c241e;
-            color: #fcf8f3;
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-nordexx:active {
-            transform: translateY(2px) scale(0.98);
-        }
-
-        .btn-nordexx .icon-arrow {
-            font-size: 20px;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-nordexx:hover .icon-arrow {
-            transform: translateX(6px);
+        .btn-theme.full-width {
+            grid-column: 1 / -1;
         }
 
         /* --- BLOC 3 : AMBIANCE (date/heure/météo/citation/audio) --- */
@@ -919,10 +860,6 @@
             .music-btn.small .icon {
                 font-size: 16px;
             }
-            .btn-nordexx {
-                padding: 12px 24px;
-                font-size: 15px;
-            }
             .explore-row {
                 grid-template-columns: 1fr 1fr;
                 gap: 8px;
@@ -1039,14 +976,14 @@
                         <span class="emoji">📄</span>
                         <span class="label">CV</span>
                     </a>
-                    <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme" style="grid-column: 1 / -1;">
+                    <a href="https://ingenierie-travaux.vercel.app/espacedetente" target="_blank" rel="noopener noreferrer" class="btn-theme full-width">
                         <span class="emoji">💡</span>
                         <span class="label">Outils interactifs</span>
                     </a>
                 </div>
             </div>
 
-            <!-- GROUPE 2 : Découvertes (StyleShop + Nordexx) -->
+            <!-- GROUPE 2 : Découvertes (StyleShop + Nordexx sur la même ligne) -->
             <div class="explore-group">
                 <div class="group-label">🛍️ Découvertes</div>
                 <div class="explore-row">
@@ -1054,7 +991,7 @@
                         <span class="emoji">📦</span>
                         <span class="label">StyleShop</span>
                     </a>
-                    <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme" style="grid-column: 1 / -1;">
+                    <a href="https://nordexx-chi.vercel.app/" target="_blank" rel="noopener noreferrer" class="btn-theme">
                         <span class="emoji">🚀</span>
                         <span class="label">Nordexx</span>
                     </a>
