@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8" />
+<html lang="fr"><head>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title id="pageTitle">saison · ambiance</title>
+    <title id="pageTitle">Lundi · été · productif</title>
     <!-- Font Awesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <style>
@@ -933,8 +932,8 @@
     <!-- ÉCRAN DE DÉMARRAGE -->
     <div id="startScreen">
         <span class="start-icon" id="startIcon">☀️</span>
-        <h2 id="splashTitle">saison · ambiance</h2>
-        <div class="sous-start" id="splashSub">bienvenue · saison · présent</div>
+        <h2 id="splashTitle">Lundi · été · productif</h2>
+        <div class="sous-start" id="splashSub">bienvenue · productif · présent</div>
         <button class="start-btn" id="startBtn">▶ Démarrer</button>
     </div>
 
@@ -944,10 +943,10 @@
         <!-- BLOC 1 : EN-TÊTE / SAISON -->
         <!-- ============================================================ -->
         <div class="block-header">
-            <span class="badge-saison" id="badgeSaison">☀️ saison</span>
+            <span class="badge-saison" id="badgeSaison">☀️ été</span>
             <span class="icon-saison" id="iconSaison">🌻</span>
-            <h1 id="mainTitle">Bonjour <span>☀️</span></h1>
-            <div class="sous-titre" id="dailySubtitle">✧ douceur & légèreté ✧</div>
+            <h1 id="mainTitle">Bonsoir <span>🌅</span></h1>
+            <div class="sous-titre" id="dailySubtitle">✧ énergie &amp; nouveau départ ✧</div>
         </div>
 
         <!-- ============================================================ -->
@@ -1007,21 +1006,21 @@
             <div class="datetime-block">
                 <div class="row">
                     <span class="row-item week-number">
-                        ✨ Semaine <span id="weekDisplay">--</span>
+                        ✨ Semaine <span id="weekDisplay">36</span>
                     </span>
                     <span class="row-item date-part">
-                        📅 <span id="dateDisplay">--</span>
+                        📅 <span id="dateDisplay">Lundi 7 septembre 2026</span>
                     </span>
                     <span class="row-item time-part">
-                        🕒 <span id="timeDisplay">--:--</span>
-                        <span class="seconds" id="secondsDisplay">:--</span>
+                        🕒 <span id="timeDisplay">19:05</span>
+                        <span class="seconds" id="secondsDisplay">:09</span>
                     </span>
                 </div>
                 <div class="row">
                     <span class="row-item weather-part" id="weatherDisplay">
-                        <span class="weather-emoji" id="weatherEmoji">☀️</span>
+                        <span class="weather-emoji" id="weatherEmoji">🌍</span>
                         <span class="weather-temp" id="weatherTemp">--°C</span>
-                        <span class="weather-city" id="weatherCity">📍 --</span>
+                        <span class="weather-city" id="weatherCity">📍 Lyon</span>
                     </span>
                     <button class="btn-position" id="btnPosition" title="Utiliser ma position précise">
                         <i class="fas fa-location-dot"></i> Ma position
@@ -1031,7 +1030,7 @@
 
             <!-- MESSAGE DYNAMIQUE (citation) -->
             <div class="message">
-                <strong>“</strong> <span id="dailyMessage">--</span> <strong>”</strong>
+                <strong>“</strong> <span id="dailyMessage">🚀 Nouveau départ, nouvelle semaine, nouveaux objectifs.</span> <strong>”</strong>
             </div>
 
             <!-- CONTROLE AUDIO -->
@@ -1060,7 +1059,7 @@
 
         <div class="footer">
             ★ <a href="#">Recevoir la lettre</a> — offerte<br />
-            <span style="font-size:12px; color:#c4b3a2;" id="footerYear">saison · sans distraction</span>
+            <span style="font-size:12px; color:#c4b3a2;" id="footerYear">été 2026 · sans distraction</span>
         </div>
     </div>
 
@@ -1130,13 +1129,13 @@
                 return { nom: "hiver", emoji: "❄️", ambiance: "paisible", icone: "❄️" };
             }
 
+            // ✅ VERSION UTC CORRIGÉE
             function getWeekNumber(date) {
-                const d = new Date(date);
-                d.setHours(0, 0, 0, 0);
-                const jeudi = new Date(d);
-                jeudi.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
-                const debutAnnee = new Date(jeudi.getFullYear(), 0, 1);
-                return Math.floor((jeudi - debutAnnee) / 86400000 / 7) + 1;
+                const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+                d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+                const annee = d.getUTCFullYear();
+                const debutAnnee = new Date(Date.UTC(annee, 0, 1));
+                return Math.ceil(((d - debutAnnee) / 86400000 + 1) / 7);
             }
 
             function getSalutation(heure) {
@@ -1162,7 +1161,10 @@
                 timeDisplay.textContent = h + ':' + min;
                 secondsDisplay.textContent = ':' + sec;
 
-                weekDisplay.textContent = getWeekNumber(now);
+                // ✅ Correction : on utilise une date UTC normalisée
+                const nowUTC = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+                weekDisplay.textContent = getWeekNumber(nowUTC);
+
                 iconSaison.textContent = saison.icone;
                 startIcon.textContent = saison.emoji;
 
@@ -1452,5 +1454,6 @@
         }
     </script>
 
-</body>
-</html>
+
+
+</body></html>
